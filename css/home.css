@@ -1,0 +1,179 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-weight: 100;
+}
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
+body {
+	margin: 0;
+	padding: 0;
+	font-family: "Montez", cursive;
+	font-size: 1rem;
+	width: 100vw;
+	overflow-x: hidden;
+}
+
+#custom-cursor {
+	position: fixed;
+	width: 80px;
+	height: 80px;
+	border: 2px solid white;
+	border-radius: 50%;
+}
+
+.section1 {
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	position: absolute;
+	top: 0;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	/* cursor: none; */
+}
+
+.section1 div {
+	z-index: 2;
+}
+
+.main-content {
+	color: white;
+	font-size: 2.5rem;
+	font-style: normal;
+	text-align: center;
+	line-height: 5rem;
+	letter-spacing: 0.4rem;
+	word-spacing: normal;
+}
+
+#canvas1 {
+	cursor: none;
+}
+
+.arrow {
+	display: flex;
+	justify-content: center;
+}
+
+.arrow img {
+	width: 60px;
+	height: 60px;
+	margin-top: 20px;
+}
+
+.arrow2 {
+	margin-top: 140px;
+	display: flex;
+	justify-content: center;
+}
+
+.arrow2 img {
+	width: 60px;
+	height: 60px;
+	transform: rotateX(180deg);
+}
+
+.tantrum {
+	position: relative;
+	left: -6vw;
+	top: -6vh;
+}
+
+.of {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.of * {
+	top: 0;
+	left: 0;
+	position: absolute;
+}
+
+.of img {
+	width: 140px;
+}
+
+.of h2 {
+	top: 40px;
+	left: 60px;
+	/* font-size: 60px; */
+}
+.brackets {
+	display: flex;
+	align-items: center;
+	position: absolute;
+	left: 180px;
+	top: 60px;
+	width: max-content;
+}
+
+.brac {
+	height: 80px;
+	overflow: hidden;
+}
+
+.brac img {
+	height: 100%;
+}
+
+.brack-data {
+	height: 80px;
+	font-family: "Poppins", sans-serif;
+	line-height: 30px;
+	word-spacing: normal;
+	letter-spacing: 0.1rem;
+	margin-top: 20px;
+}
+
+.brackets p {
+	margin: 0;
+	font-size: 24px;
+}
+
+@media screen and (max-width: 800px) {
+	.arrow img {
+		display: none;
+	}
+	.arrow2 {
+		margin: 0;
+		margin-top: 100px;
+	}
+	.arrow2 img {
+		display: none;
+	}
+
+	.of h2 {
+		top: 60px;
+		left: 200px;
+	}
+
+	.brackets {
+		display: none;
+	}
+	.of img {
+		display: none;
+	}
+}
+
+@media screen and (max-width: 480px) {
+	.main-content {
+		font-size: 1.5rem;
+		line-height: normal;
+	}
+	.arrow2 {
+		margin: 0;
+		margin-top: 60px;
+	}
+	.of h2 {
+		left: 120px;
+	}
+}
