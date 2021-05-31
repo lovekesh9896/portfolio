@@ -30,7 +30,7 @@ window.addEventListener("mousemove", (e) => {
 });
 
 canvas.width = sizes.width;
-canvas.height = sizes.height;
+canvas.height = sizes.height * 5;
 
 // let W = canvas.width;
 // let H = canvas.height;
@@ -41,7 +41,7 @@ window.addEventListener("resize", () => {
 	sizes.height = window.innerHeight;
 
 	canvas.width = sizes.width;
-	canvas.height = sizes.height;
+	canvas.height = sizes.height * 5;
 });
 
 class FixedBalls {
@@ -117,7 +117,10 @@ class Ball {
 	}
 
 	update() {
-		if (this.y + this.r + this.dy >= canvas.height) {
+		let Yscroll =
+			document.documentElement.scrollTop || document.body.scrollTop;
+		let finalY = Math.min(Yscroll + sizes.height, canvas.height);
+		if (this.y + this.r + this.dy >= finalY) {
 			this.dy = -this.dy * friction;
 			this.touched += 1;
 
@@ -129,6 +132,38 @@ class Ball {
 			}
 		} else {
 			this.dy += gravity;
+		}
+
+		if (
+			this.x >= sizes.width * 0.75 &&
+			this.y + this.r * 2 >= fixedBalls[4].y - fixedBalls[4].r &&
+			this.y + this.r <= fixedBalls[4].y
+		) {
+			this.dy = -this.dy;
+		}
+
+		if (
+			this.x <= sizes.width * 0.25 &&
+			this.y + this.r * 2 >= fixedBalls[5].y - fixedBalls[5].r &&
+			this.y + this.r <= fixedBalls[5].y
+		) {
+			this.dy = -this.dy;
+		}
+
+		if (
+			this.x >= sizes.width * 0.75 &&
+			this.y + this.r * 2 >= fixedBalls[6].y - fixedBalls[6].r &&
+			this.y + this.r <= fixedBalls[6].y
+		) {
+			this.dy = -this.dy;
+		}
+
+		if (
+			this.x <= sizes.width * 0.25 &&
+			this.y + this.r * 2 >= fixedBalls[7].y - fixedBalls[7].r &&
+			this.y + this.r <= fixedBalls[7].y
+		) {
+			this.dy = -this.dy;
 		}
 
 		if (this.x + this.r + this.dx >= canvas.width || this.x - this.r <= 0) {
@@ -210,28 +245,74 @@ function drawFixedBalls() {
 	const p4 = new Path2D(path4);
 	c.fill(p4);
 
+	let circle5 = new FixedBalls(
+		sizes.width * 0.75,
+		sizes.height * 1.5,
+		sizes.width * 0.25
+	);
+	const path5 = circle5.circlePath(0, 0);
+	const p5 = new Path2D(path5);
+	c.fill(p5);
+
+	let circle6 = new FixedBalls(
+		sizes.width * 0.25,
+		sizes.height * 2.5,
+		sizes.width * 0.25
+	);
+	const path6 = circle6.circlePath(0, 0);
+	const p6 = new Path2D(path6);
+	c.fill(p6);
+
+	let circle7 = new FixedBalls(
+		sizes.width * 0.75,
+		sizes.height * 3.5,
+		sizes.width * 0.25
+	);
+	const path7 = circle5.circlePath(0, 0);
+	const p7 = new Path2D(path7);
+	c.fill(p7);
+
+	let circle8 = new FixedBalls(
+		sizes.width * 0.26,
+		sizes.height * 4.5,
+		sizes.width * 0.25
+	);
+	const path8 = circle6.circlePath(0, 0);
+	const p8 = new Path2D(path8);
+	c.fill(p8);
+
 	if (fixedBalls.length == 0) {
 		fixedBalls.push(circle1);
 		fixedBalls.push(circle2);
 		fixedBalls.push(circle3);
 		fixedBalls.push(circle4);
+		fixedBalls.push(circle5);
+		fixedBalls.push(circle6);
+		fixedBalls.push(circle7);
+		fixedBalls.push(circle8);
 	} else if (fixedBalls[0].x != circle1.x) {
 		fixedBalls = [];
 		fixedBalls.push(circle1);
 		fixedBalls.push(circle2);
 		fixedBalls.push(circle3);
 		fixedBalls.push(circle4);
+		fixedBalls.push(circle5);
+		fixedBalls.push(circle6);
+		fixedBalls.push(circle7);
+		fixedBalls.push(circle8);
 	}
 }
 
 function generateMore() {
 	setInterval(() => {
+		let Yscroll =
+			document.documentElement.scrollTop || document.body.scrollTop;
 		if (!document.hidden && balls.length < 10) {
-			let numberOfBalls = randomIntFromRange(3, 5);
+			let numberOfBalls = randomIntFromRange(3, 5 - balls.length);
 			for (let i = 0; i < numberOfBalls; i++) {
 				let radius = randomIntFromRange(10, 30);
 				let x = randomIntFromRange(radius, sizes.width);
-				let y = -radius;
+				let y = Yscroll - radius;
 				let dx = randomIntFromRange(-0.5, 0.5);
 				let dy = randomIntFromRange(-0.5, 0.5);
 				balls.push(new Ball(x, y, dx, dy, radius));
@@ -299,7 +380,7 @@ function adjustPositions(ballA, ballB, depth) {
 
 function animate() {
 	c.fillStyle = "#23689b";
-	c.fillRect(0, 0, sizes.width, sizes.height);
+	c.fillRect(0, 0, sizes.width, sizes.height * 5);
 	drawFixedBalls();
 	for (let ball of balls) {
 		ball.update();
@@ -320,15 +401,6 @@ function animate() {
 				resolveCollision(ball, fixedball);
 			}
 		});
-		// for mouse
-		if (sizes.width > 800) {
-			let collision = checkCollision(ball, mouse);
-			if (collision[0]) {
-				adjustPositions(ball, mouse, collision[1]);
-				resolveCollision(ball, mouse);
-				//play a middle 'C' for the duration of an 8th note
-			}
-		}
 	}
 	requestAnimationFrame(animate);
 }
@@ -336,3 +408,262 @@ function animate() {
 drawFixedBalls();
 init();
 animate();
+
+// page animation
+let projects = document.getElementsByClassName("view-project");
+let div = document.getElementById("div-animate");
+let i = 0;
+
+for (let i = 0; i < projects.length; i++) {
+	projects[i].addEventListener("click", (e) => {
+		console.log("yes");
+		div.style.display = "flex";
+		div.classList.add("anim");
+	});
+}
+
+function similarity(s1, s2) {
+	var longer = s1;
+	var shorter = s2;
+	if (s1.length < s2.length) {
+		longer = s2;
+		shorter = s1;
+	}
+	var longerLength = longer.length;
+	if (longerLength == 0) {
+		return 1.0;
+	}
+	return (
+		(longerLength - editDistance(longer, shorter)) /
+		parseFloat(longerLength)
+	);
+}
+
+function editDistance(s1, s2) {
+	s1 = s1.toLowerCase();
+	s2 = s2.toLowerCase();
+
+	var costs = new Array();
+	for (var i = 0; i <= s1.length; i++) {
+		var lastValue = i;
+		for (var j = 0; j <= s2.length; j++) {
+			if (i == 0) costs[j] = j;
+			else {
+				if (j > 0) {
+					var newValue = costs[j - 1];
+					if (s1.charAt(i - 1) != s2.charAt(j - 1))
+						newValue =
+							Math.min(Math.min(newValue, lastValue), costs[j]) +
+							1;
+					costs[j - 1] = lastValue;
+					lastValue = newValue;
+				}
+			}
+		}
+		if (i > 0) costs[s2.length] = lastValue;
+	}
+	return costs[s2.length];
+}
+
+// handling messages
+let questions = [
+	"hi",
+	"hey",
+	"hello",
+	"how are you",
+	"how are things",
+	"what is going on",
+	"what is up",
+	"bye",
+	"good bye",
+	"goodbye",
+	"what is your name",
+	"your name",
+	"tell me about yourself",
+	"give me your description",
+	"your description",
+	"what are you made up of",
+	"technologies",
+	"your friends",
+	"friends",
+	"birthday",
+	"date of birth",
+	"how old are you",
+	"your age",
+	"where do you live",
+	"address",
+	"who is your author",
+	"your creator",
+	"your author",
+];
+
+let answeres = [
+	"hello user",
+	"hello user",
+	"hello user",
+	"i am great",
+	"i am great",
+	"nothing much, just trying to be alive",
+	"nothing much, just trying to be alive",
+	"bye bye",
+	"bye bye",
+	"bye bye",
+	"Anton - The Dry Runner",
+	"Anton - The Dry Runner",
+	"I am anton - the dry runner. I live on github and i am fast and responsive",
+	"I am anton - the dry runner. I live on github and i am fast and responsive",
+	"I am anton - the dry runner. I live on github and i am fast and responsive",
+	"I am made up of Javascript, Nodejs and codemirror",
+	"I am made up of Javascript, Nodejs and codemirror",
+	"I live alone but i have good relation with Minus and Glowbadge",
+	"I live alone but i have good relation with Minus and Glowbadge",
+	"07 Feb 2017",
+	"07 Feb 2017",
+	"3 years",
+	"3 years",
+	"github",
+	"github",
+	"lovekesh",
+	"lovekesh",
+	"lovekesh",
+];
+
+let input = document.getElementById("message-input");
+let messageList = document.getElementsByClassName("messages-list")[0];
+let isInputDisabled = false;
+
+function findTop3Suggestions(question) {
+	let ind1 = 0;
+	let ind2 = 0;
+	let ind3 = 0;
+	let a = 0;
+	let b = 0;
+	let c = 0;
+	for (let i = 0; i < questions.length; i++) {
+		let temp = similarity(question, questions[i]);
+		if (temp >= ind1) {
+			ind3 = ind2;
+			ind2 = ind1;
+			ind1 = temp;
+			c = b;
+			b = a;
+			a = i;
+		} else if (temp >= ind2) {
+			ind3 = ind2;
+			ind2 = temp;
+			c = b;
+			b = i;
+		} else if (temp > ind3) {
+			ind3 = temp;
+			c = i;
+		}
+	}
+	console.log(ind1, ind2, ind3);
+	return [question[a], questions[b], questions[c]];
+}
+
+function giveReply(question) {
+	let message = document.createElement("LI");
+	message.classList.add("message-left");
+	let index = -1;
+	let sim = 0;
+	for (let i = 0; i < questions.length; i++) {
+		let temp = similarity(question, questions[i]);
+		if (temp > sim) {
+			sim = temp;
+			index = i;
+		}
+	}
+	if (sim >= 0.6) {
+		message.innerText = answeres[index];
+	} else if (sim < 0.6) {
+		message.innerText = "Do you mean any of the follow?";
+		messageList.append(message);
+		// create suggestions
+		let suggestionBox = document.createElement("DIV");
+		suggestionBox.classList.add("suggestions");
+		let arr = findTop3Suggestions(question);
+		console.log(arr);
+		let str = `<li class="message-left">
+                <a class="message-link" href="">${arr[0]}</a>
+            </li>
+            <li class="message-left">
+                <a class="message-link" href=""
+                    >${arr[1]}</a
+                >
+            </li>
+            <li class="message-left">
+                <a class="message-link" href=""
+                    >${arr[2]}</a
+                >
+            </li>`;
+		console.log(
+			"simirlarity for",
+			question,
+			"is",
+			sim,
+			"with",
+			questions[index]
+		);
+		messageList.append(suggestionBox);
+		suggestionBox.innerHTML = str;
+		suggestionBox.scrollIntoView();
+		addListenerOnMessagelinks();
+		return;
+	} else {
+		message.innerText = "Sorry I don't understand";
+	}
+	console.log(
+		"simirlarity for",
+		question,
+		"is",
+		sim,
+		"with",
+		questions[index]
+	);
+	messageList.append(message);
+	message.scrollIntoView();
+}
+
+function addMessageToChat() {
+	if (input.value != "") {
+		let message = document.createElement("LI");
+		let messageText = input.value.toLowerCase().replace(/[^\w\s\d]/gi, "");
+		message.classList.add("message-right");
+		message.innerText = messageText;
+		messageList.append(message);
+		input.value = "";
+		message.scrollIntoView();
+		isInputDisabled = true;
+		setTimeout(() => {
+			giveReply(messageText);
+			isInputDisabled = false;
+			input.focus();
+		}, 500);
+	}
+}
+div.addEventListener("keypress", (e) => {
+	if (e.key == "Enter") {
+		if (!isInputDisabled) {
+			addMessageToChat();
+		}
+	}
+});
+
+document.getElementById("send-message-btn").addEventListener("click", () => {
+	if (!isInputDisabled) {
+		addMessageToChat();
+	}
+});
+
+function addListenerOnMessagelinks() {
+	let messageLinks = document.getElementsByClassName("message-link");
+	for (let i = 0; i < messageLinks.length; i++) {
+		messageLinks[i].addEventListener("click", (e) => {
+			e.preventDefault();
+			input.value = messageLinks[i].innerText;
+			document.getElementById("send-message-btn").click();
+		});
+	}
+}
+addListenerOnMessagelinks();
