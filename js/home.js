@@ -190,7 +190,7 @@ function randomColor(colors) {
 }
 
 function drawFixedBalls() {
-	c.fillStyle = "#fff";
+	c.fillStyle = "#ff0000";
 	let circle1 = new FixedBalls(
 		sizes.width * 0.78,
 		sizes.height * 0.1,
@@ -263,8 +263,8 @@ function drawFixedBalls() {
 	c.fill(p5);
 
 	let circle6 = new FixedBalls(
-		sizes.width * 0.23,
-		sizes.height * 2.5,
+		sizes.width * 0.22,
+		sizes.height * 2.51,
 		radius
 	);
 	const path6 = circle6.circlePath(0, 0);
@@ -281,8 +281,8 @@ function drawFixedBalls() {
 	c.fill(p7);
 
 	let circle8 = new FixedBalls(
-		sizes.width * 0.23,
-		sizes.height * 4.5,
+		sizes.width * 0.22,
+		sizes.height * 4.51,
 		radius
 	);
 	const path8 = circle8.circlePath(0, 0);
