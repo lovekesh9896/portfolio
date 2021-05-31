@@ -190,7 +190,7 @@ function randomColor(colors) {
 }
 
 function drawFixedBalls() {
-	c.fillStyle = "#ff0000";
+	c.fillStyle = "#fff";
 	let circle1 = new FixedBalls(
 		sizes.width * 0.78,
 		sizes.height * 0.1,
