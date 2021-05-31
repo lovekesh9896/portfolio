@@ -42,6 +42,8 @@ window.addEventListener("resize", () => {
 
 	canvas.width = sizes.width;
 	canvas.height = sizes.height * 5;
+
+	drawFixedBalls();
 });
 
 class FixedBalls {
@@ -136,7 +138,7 @@ class Ball {
 
 		if (
 			this.x >= sizes.width * 0.75 &&
-			this.y + this.r * 2 >= fixedBalls[4].y - fixedBalls[4].r &&
+			this.y + this.r >= fixedBalls[4].y - fixedBalls[4].r &&
 			this.y + this.r <= fixedBalls[4].y
 		) {
 			this.dy = -this.dy;
@@ -144,7 +146,7 @@ class Ball {
 
 		if (
 			this.x <= sizes.width * 0.25 &&
-			this.y + this.r * 2 >= fixedBalls[5].y - fixedBalls[5].r &&
+			this.y + this.r >= fixedBalls[5].y - fixedBalls[5].r &&
 			this.y + this.r <= fixedBalls[5].y
 		) {
 			this.dy = -this.dy;
@@ -152,7 +154,7 @@ class Ball {
 
 		if (
 			this.x >= sizes.width * 0.75 &&
-			this.y + this.r * 2 >= fixedBalls[6].y - fixedBalls[6].r &&
+			this.y + this.r >= fixedBalls[6].y - fixedBalls[6].r &&
 			this.y + this.r <= fixedBalls[6].y
 		) {
 			this.dy = -this.dy;
@@ -160,7 +162,7 @@ class Ball {
 
 		if (
 			this.x <= sizes.width * 0.25 &&
-			this.y + this.r * 2 >= fixedBalls[7].y - fixedBalls[7].r &&
+			this.y + this.r >= fixedBalls[7].y - fixedBalls[7].r &&
 			this.y + this.r <= fixedBalls[7].y
 		) {
 			this.dy = -this.dy;
@@ -188,7 +190,7 @@ function randomColor(colors) {
 }
 
 function drawFixedBalls() {
-	c.fillStyle = "#fff";
+	c.fillStyle = "fff";
 	let circle1 = new FixedBalls(
 		sizes.width * 0.78,
 		sizes.height * 0.1,
@@ -245,39 +247,45 @@ function drawFixedBalls() {
 	const p4 = new Path2D(path4);
 	c.fill(p4);
 
+	let radius = 0;
+	if (sizes.height <= sizes.width) {
+		radius = sizes.height * 0.5;
+	} else {
+		radius = sizes.width * 0.5;
+	}
 	let circle5 = new FixedBalls(
-		sizes.width * 0.75,
-		sizes.height * 1.5,
-		sizes.width * 0.25
+		sizes.width * 0.77,
+		sizes.height * 1.51,
+		radius
 	);
 	const path5 = circle5.circlePath(0, 0);
 	const p5 = new Path2D(path5);
 	c.fill(p5);
 
 	let circle6 = new FixedBalls(
-		sizes.width * 0.25,
+		sizes.width * 0.23,
 		sizes.height * 2.5,
-		sizes.width * 0.25
+		radius
 	);
 	const path6 = circle6.circlePath(0, 0);
 	const p6 = new Path2D(path6);
 	c.fill(p6);
 
 	let circle7 = new FixedBalls(
-		sizes.width * 0.75,
-		sizes.height * 3.5,
-		sizes.width * 0.25
+		sizes.width * 0.77,
+		sizes.height * 3.51,
+		radius
 	);
-	const path7 = circle5.circlePath(0, 0);
+	const path7 = circle7.circlePath(0, 0);
 	const p7 = new Path2D(path7);
 	c.fill(p7);
 
 	let circle8 = new FixedBalls(
-		sizes.width * 0.26,
+		sizes.width * 0.23,
 		sizes.height * 4.5,
-		sizes.width * 0.25
+		radius
 	);
-	const path8 = circle6.circlePath(0, 0);
+	const path8 = circle8.circlePath(0, 0);
 	const p8 = new Path2D(path8);
 	c.fill(p8);
 
