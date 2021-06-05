@@ -13,8 +13,10 @@ body {
 	font-family: "Montez", cursive;
 	font-size: 1rem;
 	width: 100vw;
+	height: 100vh;
+	overflow-y: hidden;
 	overflow-x: hidden;
-	background: #23689b;
+	background: linear-gradient(to right, #6441a5, #2a0845);
 }
 
 #custom-cursor {
@@ -29,34 +31,63 @@ body {
 	width: 100vw;
 	height: 100vh;
 	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
 	position: absolute;
-	top: 0;
+	top: 20vh;
+	left: 10vw;
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
-	/* cursor: none; */
 }
 
 .section1 div {
 	z-index: 2;
 }
 
-.main-content {
-	color: white;
-	font-size: 2.5rem;
-	font-style: normal;
-	text-align: center;
-	line-height: 5rem;
-	letter-spacing: 0.4rem;
-	word-spacing: normal;
+@keyframes textup {
+	from {
+		transform: translateY(-100px);
+		opacity: 0;
+	}
+	to {
+		transform: translateY(0);
+		opacity: 1;
+	}
 }
 
-#canvas1 {
-	/* cursor: none; */
+.main-content {
+	color: white;
+	font-size: 2rem;
+	font-style: normal;
+	line-height: 5.4rem;
+	word-spacing: normal;
+	font-family: "Aldrich", sans-serif;
+}
+
+.line1 {
+	opacity: 0;
+}
+
+.line2 {
+	opacity: 0;
+	animation-delay: 300ms;
+}
+.line3 {
+	opacity: 0;
+	animation-delay: 600ms;
+}
+
+.line-animation {
+	animation: textup 1s forwards;
+}
+
+.main-content h2 {
+	font-size: 2em;
+}
+
+.margin40 {
+	height: 5rem;
+	margin-left: 40px;
 }
 
 .arrow {
@@ -112,10 +143,7 @@ body {
 .brackets {
 	display: flex;
 	align-items: center;
-	position: absolute;
-	left: 180px;
-	top: 60px;
-	width: max-content;
+	margin-left: 40px;
 }
 
 .brac {
@@ -145,6 +173,7 @@ body {
 #section2-container {
 	margin-top: -400vh;
 	z-index: 2000;
+	display: none;
 }
 .section2 {
 	display: flex;
@@ -232,9 +261,10 @@ model-viewer::part(default-progress-bar) {
 
 /* ---------- about ---------------- */
 .about {
-	display: flex;
 	font-family: "Monda", sans-serif;
-	background-color: #e5e5e5;
+	background-color: #f8f8f8;
+	padding: 10vh;
+	display: none;
 }
 
 .about > div {
