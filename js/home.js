@@ -936,7 +936,12 @@ function about() {
 
 window.onload = function () {
 	let url = window.location.href;
-	if (url == "http://127.0.0.1:5500/port/index.html") {
+	if (
+		url != "http://127.0.0.1:5500/port/about.html" ||
+		"https://lovekesh9896.github.io/portfolio/about" ||
+		"http://127.0.0.1:5500/port/about" ||
+		"https://lovekesh9896.github.io/portfolio/about.html"
+	) {
 		console.log("home");
 		home();
 	} else {
