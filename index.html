@@ -26,235 +26,217 @@
 			src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"
 		></script>
 	</head>
-	<body>
-		<div class="section1">
-			<div class="main-content">
-				<div>
-					<h2 class="line1">Full Stack Devloper</h2>
-					<div class="line2" style="display: flex">
-						<h2>BASED OUT OF</h2>
-						<img
-							class="margin40"
-							src="./images/curly_arrow.png"
-							alt=""
-						/>
-					</div>
-					<div
-						class="line3"
-						style="display: flex; align-items: center"
-					>
-						<h2>DELHI</h2>
-						<div class="brackets">
-							<div class="brac">
-								<img src="./images/bracket.png" alt="" />
-							</div>
-							<div class="brack-data">
-								<p>Hi, My name is Lovekesh and</p>
-								<p>I do data drive decisions.</p>
-							</div>
-							<div class="brac">
-								<img src="./images/bracket2.png" alt="" />
+	<body data-barba="wrapper">
+		<ul class="transition">
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+
+		<main data-barba="container" data-barba-namespace="home">
+			<div class="section1">
+				<div class="main-content">
+					<div>
+						<h2 class="line1">Full Stack Devloper</h2>
+						<div class="line2" style="display: flex">
+							<h2>BASED OUT OF</h2>
+							<img
+								class="margin40"
+								src="./images/curly_arrow.png"
+								alt=""
+							/>
+						</div>
+						<div
+							class="line3"
+							style="display: flex; align-items: center"
+						>
+							<h2>DELHI</h2>
+							<div class="brackets">
+								<div class="brac">
+									<img src="./images/bracket.png" alt="" />
+								</div>
+								<div class="brack-data">
+									<p>Hi, My name is Lovekesh and</p>
+									<p>I do data drive decisions.</p>
+								</div>
+								<div class="brac">
+									<img src="./images/bracket2.png" alt="" />
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
 
-		<!-- <div id="custom-cursor"></div> -->
+			<!-- <div id="custom-cursor"></div> -->
 
-		<canvas id="canvas1"></canvas>
-		<div id="section2-container">
-			<!-- section 2 -->
-			<section class="section2">
-				<div class="left-section">
-					<div class="project-number">01</div>
-					<div class="project-name">ANTON - The Dry Runner</div>
-					<div class="project-description">
-						Create with Javascript, Node js and express Anton can
-						create recursion tree of any java code with just one
-						click.
+			<canvas id="canvas1"></canvas>
+			<canvas id="canvas2"></canvas>
+			<div id="section2-container">
+				<!-- section 2 -->
+				<section class="section2">
+					<div class="left-section">
+						<div class="project-number">01</div>
+						<div class="project-name">ANTON - The Dry Runner</div>
+						<div class="project-description">
+							Create with Javascript, Node js and express Anton
+							can create recursion tree of any java code with just
+							one click.
+						</div>
+						<div class="view-project">
+							<span>Meet Anton</span>
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke="currentColor"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									stroke-width="2"
+									d="M14 5l7 7m0 0l-7 7m7-7H3"
+								/>
+							</svg>
+						</div>
 					</div>
-					<div class="view-project">
-						<span>Meet Anton</span>
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke="currentColor"
-						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								stroke-width="2"
-								d="M14 5l7 7m0 0l-7 7m7-7H3"
-							/>
-						</svg>
+					<div class="right-section">
+						<model-viewer
+							id="java"
+							disable-zoom
+							loading="eager"
+							alt="logo of java language in 3d"
+							src="./3dmodels/java/java.gltf"
+							camera-controls
+							poster="./3dmodels/java/java.png"
+						></model-viewer>
 					</div>
-				</div>
-				<div class="right-section">
-					<model-viewer
-						id="java"
-						disable-zoom
-						loading="eager"
-						alt="logo of java language in 3d"
-						src="./3dmodels/java/java.gltf"
-						camera-controls
-						poster="./3dmodels/java/java.png"
-					></model-viewer>
-				</div>
-			</section>
+				</section>
 
-			<section class="section2 inverted-flex">
-				<div class="left-section">
-					<div class="project-number">02</div>
-					<div class="project-name">DIGPADS - The Internship</div>
-					<div class="project-description">
-						Digpads is created with beautiful components of MERN
-						stack. He is secure, reponsive and handsome.
+				<section class="section2 inverted-flex">
+					<div class="left-section">
+						<div class="project-number">02</div>
+						<div class="project-name">DIGPADS - The Internship</div>
+						<div class="project-description">
+							Digpads is created with beautiful components of MERN
+							stack. He is secure, reponsive and handsome.
+						</div>
+						<div class="view-project">
+							<span>Meet Digpads</span>
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke="currentColor"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									stroke-width="2"
+									d="M14 5l7 7m0 0l-7 7m7-7H3"
+								/>
+							</svg>
+						</div>
 					</div>
-					<div class="view-project">
-						<span>Meet Digpads</span>
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke="currentColor"
-						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								stroke-width="2"
-								d="M14 5l7 7m0 0l-7 7m7-7H3"
-							/>
-						</svg>
+					<div class="right-section">
+						<model-viewer
+							class="reverse-border-radius"
+							disable-zoom
+							src="./3dmodels/house/house.gltf"
+							camera-controls
+							loading="eager"
+							poster="./3dmodels/house/house.png"
+						></model-viewer>
 					</div>
-				</div>
-				<div class="right-section">
-					<model-viewer
-						class="reverse-border-radius"
-						disable-zoom
-						src="./3dmodels/house/house.gltf"
-						camera-controls
-						loading="eager"
-						poster="./3dmodels/house/house.png"
-					></model-viewer>
-				</div>
-			</section>
+				</section>
 
-			<section class="section2">
-				<div class="left-section">
-					<div class="project-number">03</div>
-					<div class="project-name">Minus - The Card Game</div>
-					<div class="project-description">
-						Created with Javascript, GSAP, Socket.io and Fastify
-						Minus is extremely Athletic and fun.
+				<section class="section2">
+					<div class="left-section">
+						<div class="project-number">03</div>
+						<div class="project-name">Minus - The Card Game</div>
+						<div class="project-description">
+							Created with Javascript, GSAP, Socket.io and Fastify
+							Minus is extremely Athletic and fun.
+						</div>
+						<div class="view-project">
+							<span>Meet Minus</span>
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke="currentColor"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									stroke-width="2"
+									d="M14 5l7 7m0 0l-7 7m7-7H3"
+								/>
+							</svg>
+						</div>
 					</div>
-					<div class="view-project">
-						<span>Meet Minus</span>
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke="currentColor"
-						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								stroke-width="2"
-								d="M14 5l7 7m0 0l-7 7m7-7H3"
-							/>
-						</svg>
+					<div class="right-section">
+						<model-viewer
+							disable-zoom
+							class="model3"
+							src="./3dmodels/cards/cards.gltf"
+							camera-controls
+						></model-viewer>
 					</div>
-				</div>
-				<div class="right-section">
-					<model-viewer
-						disable-zoom
-						class="model3"
-						src="./3dmodels/cards/cards.gltf"
-						camera-controls
-					></model-viewer>
-				</div>
-			</section>
+				</section>
 
-			<section class="section2 inverted-flex">
-				<div class="left-section">
-					<div class="project-number">04</div>
-					<div class="project-name">
-						GlowBadge - The Badge Distributor
+				<section class="section2 inverted-flex">
+					<div class="left-section">
+						<div class="project-number">04</div>
+						<div class="project-name">
+							GlowBadge - The Badge Distributor
+						</div>
+						<div class="project-description">
+							He was created during Globalshala 2.0 hackthon to
+							help people celebrate their achievemts with the help
+							of badges.
+						</div>
+						<div class="view-project">
+							<span>Meet GlowBadge</span>
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke="currentColor"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									stroke-width="2"
+									d="M14 5l7 7m0 0l-7 7m7-7H3"
+								/>
+							</svg>
+						</div>
 					</div>
-					<div class="project-description">
-						He was created during Globalshala 2.0 hackthon to help
-						people celebrate their achievemts with the help of
-						badges.
+					<div class="right-section">
+						<model-viewer
+							class="
+								reverse-border-radius reverse-border-radius-less
+							"
+							disable-zoom
+							src="./3dmodels/badge/badge.gltf"
+							camera-controls
+						></model-viewer>
 					</div>
-					<div class="view-project">
-						<span>Meet GlowBadge</span>
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke="currentColor"
-						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								stroke-width="2"
-								d="M14 5l7 7m0 0l-7 7m7-7H3"
-							/>
-						</svg>
-					</div>
-				</div>
-				<div class="right-section">
-					<model-viewer
-						class="reverse-border-radius reverse-border-radius-less"
-						disable-zoom
-						src="./3dmodels/badge/badge.gltf"
-						camera-controls
-					></model-viewer>
-				</div>
-			</section>
-		</div>
-
-		<section class="about">
-			<div class="about-left-section">
-				<img src="./images/loki.jpg" alt="" />
+				</section>
 			</div>
-			<div class="about-right-section">
-				<h2>Lovekesh Dhanda</h2>
+
+			<div id="links">
 				<p>
-					I am a Full Stack Web Developer from India. I generally work
-					in MERN stack but I am a quick learner and always ready to
-					learn new technologies. I love making animations using CSS
-					and JS, you can check my
-					<a class="link" href="">Codepen here</a>. I hold
-					<span class="highlight"> 976 rank </span> in
-					<a class="link" href="">CSS battle</a> which you can check
-					here.
+					<a class="link-highlight second" href="./index.html"
+						>HOME
+					</a>
 				</p>
-				<p>
-					I also love DS and Algorithms which is why I was
-					<span class="highlight">
-						<a class="link" href="">TA</a> and then
-						<a class="link" href="">Mentor</a></span
-					>
-					at <a href="">Coding Ninjas</a> in Java. Because of this I
-					can develop very optimized websites with beautiful and
-					responsive designs.
-				</p>
-				<div class="social">
-					<div class="social-links">
-						<a href=""><i class="fab fa-github"></i></a>
-						<a href=""><i class="fab fa-linkedin-in"></i></a>
-						<a href=""><i class="fas fab fa-envelope icon"></i></a>
-					</div>
-					<button class="resume">
-						<a href="/">Download Resume</a>
-						<div class="dummy"></div>
-					</button>
-				</div>
+				<p><a class="second" href="./about.html">ABOUT</a></p>
 			</div>
-		</section>
+		</main>
 
 		<div id="div-animate">
 			<div class="animate-left-section">
@@ -317,8 +299,10 @@
 			</div>
 		</div>
 
+		<script src="https://unpkg.com/@barba/core"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/gsap.min.js"></script>
 		<script src="./js/home.js"></script>
+
 		<link
 			rel="stylesheet"
 			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
