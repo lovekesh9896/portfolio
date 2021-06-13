@@ -4,7 +4,6 @@ window.onbeforeunload = function () {
 
 function home() {
 	// home page content
-
 	function handleHomePageCanvas() {
 		const canvas = document.querySelector("#canvas1");
 		const canvas2 = document.querySelector("#canvas2");
@@ -683,6 +682,8 @@ function home() {
 	}
 	handleSingleProjectPage();
 	addAnimToMainText();
+
+	console.log("yes");
 }
 
 function about() {
@@ -1001,22 +1002,6 @@ barba.init({
 			async enter(data) {
 				contentAnimation();
 				window.scrollTo(0, 0);
-			},
-
-			async after() {
-				(function () {
-					let url = window.location.href;
-					console.log(url);
-					if (url == "http://127.0.0.1:5500/port/index.html") {
-						console.log("line 1007 home");
-						home();
-					} else {
-						console.log("about");
-						document.body.style["overflow-y"] = "unset";
-						document.body.style.height = "unset";
-						about();
-					}
-				})();
 			},
 
 			async once(data) {
