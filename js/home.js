@@ -1,7 +1,16 @@
 window.onbeforeunload = function () {
 	window.scrollTo(0, 0);
 };
-
+let colors = [
+	"#39FF71",
+	"#A181FF",
+	"#A5C93E",
+	"#4B6FF0",
+	"#FF39B0",
+	"#F0CC4B",
+	"#3D39FF",
+];
+let canvasScale = 6;
 function home() {
 	// home page content
 
@@ -21,11 +30,15 @@ function home() {
 		grd.addColorStop(1, "#2a0845");
 		c.fillStyle = grd;
 
+		if (sizes.width < 1200) {
+			canvasScale = 1;
+		}
+
 		canvas.width = sizes.width;
-		canvas.height = sizes.height * 5;
+		canvas.height = sizes.height * canvasScale;
 
 		canvas2.width = sizes.width;
-		canvas2.height = sizes.height * 5;
+		canvas2.height = sizes.height * canvasScale;
 
 		// sizes
 		window.addEventListener("resize", () => {
@@ -33,11 +46,17 @@ function home() {
 			sizes.height = window.innerHeight;
 
 			canvas.width = sizes.width;
-			canvas.height = sizes.height * 5;
+			canvas.height = sizes.height * canvasScale;
 
 			canvas2.width = sizes.width;
-			canvas2.height = sizes.height * 5;
+			canvas2.height = sizes.height * canvasScale;
 
+			console.log(sizes.width);
+			if (sizes.width <= 1200) {
+				canvasScale = 1;
+				canvas2.width = sizes.width;
+				canvas2.height = sizes.height * canvasScale;
+			}
 			drawFixedBalls();
 		});
 
@@ -93,6 +112,21 @@ function home() {
 			kill() {
 				balls = balls.filter((item) => item.id != this.id);
 
+				for (let i = 0; i < this.r * 2; i++) {
+					particles.push(
+						new Particle(
+							this.x,
+							this.y,
+							Math.random() * 3,
+							colors[Math.floor(randomIntFromRange(0, 7))],
+							{
+								x: (Math.random() - 0.5) * (Math.random() * 4),
+								y: (Math.random() - 0.5) * (Math.random() * 4),
+							}
+						)
+					);
+				}
+
 				if (balls.length == 0) {
 					let numberOfBalls = randomIntFromRange(1, 3);
 					for (let i = 0; i < numberOfBalls; i++) {
@@ -115,40 +149,56 @@ function home() {
 					this.dy += gravity;
 				}
 
-				if (
-					this.x >= sizes.width * 0.75 &&
-					this.y + this.r >= fixedBalls[4].y - fixedBalls[4].r &&
-					this.y + this.r <= fixedBalls[4].y
-				) {
-					this.dy = -this.dy * friction;
-					this.touched += 1;
-				}
+				if (canvasScale > 1) {
+					// ball5
+					if (
+						this.x >= sizes.width * 0.75 &&
+						this.y + this.r >= fixedBalls[4].y - fixedBalls[4].r &&
+						this.y + this.r <= fixedBalls[4].y
+					) {
+						this.dy = -this.dy * friction;
+						this.touched += 1;
+					}
 
-				if (
-					this.x <= sizes.width * 0.25 &&
-					this.y + this.r >= fixedBalls[5].y - fixedBalls[5].r &&
-					this.y + this.r <= fixedBalls[5].y
-				) {
-					this.dy = -this.dy * friction;
-					this.touched += 1;
-				}
+					// ball6
+					if (
+						this.x <= sizes.width * 0.25 &&
+						this.y + this.r >= fixedBalls[5].y - fixedBalls[5].r &&
+						this.y + this.r <= fixedBalls[5].y
+					) {
+						this.dy = -this.dy * friction;
+						this.touched += 1;
+					}
 
-				if (
-					this.x >= sizes.width * 0.75 &&
-					this.y + this.r >= fixedBalls[6].y - fixedBalls[6].r &&
-					this.y + this.r <= fixedBalls[6].y
-				) {
-					this.dy = -this.dy * friction;
-					this.touched += 1;
-				}
+					// ball7
+					if (
+						this.x >= sizes.width * 0.75 &&
+						this.y + this.r >= fixedBalls[6].y - fixedBalls[6].r &&
+						this.y + this.r <= fixedBalls[6].y
+					) {
+						this.dy = -this.dy * friction;
+						this.touched += 1;
+					}
 
-				if (
-					this.x <= sizes.width * 0.25 &&
-					this.y + this.r >= fixedBalls[7].y - fixedBalls[7].r &&
-					this.y + this.r <= fixedBalls[7].y
-				) {
-					this.dy = -this.dy * friction;
-					this.touched += 1;
+					// ball8
+					if (
+						this.x <= sizes.width * 0.25 &&
+						this.y + this.r >= fixedBalls[7].y - fixedBalls[7].r &&
+						this.y + this.r <= fixedBalls[7].y
+					) {
+						this.dy = -this.dy * friction;
+						this.touched += 1;
+					}
+
+					// ball9
+					if (
+						this.x >= sizes.width * 0.75 &&
+						this.y + this.r >= fixedBalls[8].y - fixedBalls[8].r &&
+						this.y + this.r <= fixedBalls[8].y
+					) {
+						this.dy = -this.dy * friction;
+						this.touched += 1;
+					}
 				}
 
 				if (
@@ -173,6 +223,38 @@ function home() {
 			}
 		}
 
+		class Particle {
+			constructor(x, y, radius, color, velocity) {
+				this.x = x;
+				this.y = y;
+				this.radius = radius;
+				this.color = color;
+				this.velocity = velocity;
+				this.alpha = 1;
+			}
+
+			draw() {
+				c.save();
+				c.beginPath();
+				c.globalAlpha = this.alpha;
+				c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+				c.fillStyle = this.color;
+				c.fill();
+				c.restore();
+			}
+
+			update() {
+				this.draw();
+				this.velocity.x *= 0.99;
+				this.velocity.y *= 0.99;
+				this.x = this.x + this.velocity.x;
+				this.y = this.y + this.velocity.y;
+				this.alpha = this.alpha - 0.005;
+			}
+		}
+
+		let particles = [];
+
 		function randomIntFromRange(min, max) {
 			return Math.random() * (max - min + 1) + min;
 		}
@@ -184,43 +266,55 @@ function home() {
 				sizes.height * 0.3,
 				sizes.width * 0.09
 			);
-			if (sizes.width < 500) {
-				circle1.x = sizes.width * 0.7;
-				circle1.y = sizes.height * 0.75;
-				circle1.r = sizes.width * 0.16;
-			}
 
 			let circle2 = new FixedBalls(
 				sizes.width * 0.75,
 				sizes.height * 0.7,
 				sizes.width * 0.06
 			);
-			if (sizes.width < 900) {
-				circle2.y = sizes.height * 0.35;
-			}
-			if (sizes.width < 500) {
-				circle2.x = sizes.width * 1;
-				circle2.y = sizes.height * 0.18;
-				circle2.r = sizes.width * 0.2;
-			}
+			// if (sizes.width < 900) {
+			// 	circle2.y = sizes.height * 0.35;
+			// }
+			// if (sizes.width < 500) {
+			// 	circle2.x = sizes.width * 1;
+			// 	circle2.y = sizes.height * 0.18;
+			// 	circle2.r = sizes.width * 0.2;
+			// }
 
 			let circle3 = new FixedBalls(
 				sizes.width * 0.57,
 				sizes.height * 0.85,
 				sizes.width * 0.04
 			);
-			if (sizes.width < 900) {
-				circle3.y = sizes.height * 0.2;
-			}
+			// if (sizes.width < 900) {
+			// 	circle3.y = sizes.height * 0.2;
+			// }
 			let circle4 = new FixedBalls(
 				sizes.width * 0.02,
 				sizes.height * 0.8,
 				sizes.width * 0.05
 			);
-			if (sizes.width < 500) {
-				circle4.x = sizes.width * 0.04;
-				circle4.y = sizes.height * 0.8;
-				circle4.r = sizes.width * 0.12;
+			// if (sizes.width < 500) {
+			// 	circle4.x = sizes.width * 0.04;
+			// 	circle4.y = sizes.height * 0.8;
+			// 	circle4.r = sizes.width * 0.12;
+			// }
+
+			if (sizes.width < 1000) {
+				// circle1
+				circle1.x = sizes.width * 0.9;
+				circle1.y = sizes.height * 0.15;
+				circle1.r = sizes.width * 0.08;
+
+				// circle2
+
+				circle2.x = sizes.width * 0.7;
+				circle2.y = sizes.height * 0.68;
+				circle2.r = sizes.width * 0.09;
+
+				// circle3
+
+				// circle4
 			}
 
 			circle1.draw();
@@ -229,58 +323,88 @@ function home() {
 			circle4.draw();
 
 			let radius = 0;
+			let scaleFactor = 0;
 			if (sizes.height <= sizes.width) {
 				radius = sizes.height * 0.5;
 			} else {
 				radius = sizes.width * 0.5;
 			}
+
+			console.log(sizes.width / sizes.height);
+			if (
+				sizes.width > sizes.height &&
+				sizes.width / sizes.height < 1.4
+			) {
+				scaleFactor = 120;
+			}
+
 			let circle5 = new FixedBalls(
-				sizes.width * 0.75,
+				sizes.width * 0.75 + scaleFactor,
 				sizes.height * 1.51,
 				radius
 			);
 
 			let circle6 = new FixedBalls(
-				sizes.width * 0.23,
+				sizes.width * 0.23 - scaleFactor,
 				sizes.height * 2.51,
 				radius
 			);
 
 			let circle7 = new FixedBalls(
-				sizes.width * 0.75,
+				sizes.width * 0.75 + scaleFactor,
 				sizes.height * 3.51,
 				radius
 			);
 
 			let circle8 = new FixedBalls(
-				sizes.width * 0.22,
+				sizes.width * 0.22 - scaleFactor,
 				sizes.height * 4.51,
 				radius
 			);
-			circle5.draw();
-			circle6.draw();
-			circle7.draw();
-			circle8.draw();
+
+			let circle9 = new FixedBalls(
+				sizes.width * 0.75 + scaleFactor,
+				sizes.height * 5.51,
+				radius
+			);
 
 			if (fixedBalls.length == 0) {
 				fixedBalls.push(circle1);
 				fixedBalls.push(circle2);
 				fixedBalls.push(circle3);
 				fixedBalls.push(circle4);
-				fixedBalls.push(circle5);
-				fixedBalls.push(circle6);
-				fixedBalls.push(circle7);
-				fixedBalls.push(circle8);
+				if (canvasScale > 1) {
+					circle5.draw();
+					circle6.draw();
+					circle7.draw();
+					circle8.draw();
+					circle9.draw();
+
+					fixedBalls.push(circle5);
+					fixedBalls.push(circle6);
+					fixedBalls.push(circle7);
+					fixedBalls.push(circle8);
+					fixedBalls.push(circle9);
+				}
 			} else if (fixedBalls[0].x != circle1.x) {
 				fixedBalls = [];
 				fixedBalls.push(circle1);
 				fixedBalls.push(circle2);
 				fixedBalls.push(circle3);
 				fixedBalls.push(circle4);
-				fixedBalls.push(circle5);
-				fixedBalls.push(circle6);
-				fixedBalls.push(circle7);
-				fixedBalls.push(circle8);
+				if (canvasScale > 1) {
+					circle5.draw();
+					circle6.draw();
+					circle7.draw();
+					circle8.draw();
+					circle9.draw();
+
+					fixedBalls.push(circle5);
+					fixedBalls.push(circle6);
+					fixedBalls.push(circle7);
+					fixedBalls.push(circle8);
+					fixedBalls.push(circle9);
+				}
 			}
 		}
 
@@ -361,7 +485,16 @@ function home() {
 
 		function animate() {
 			c.fillStyle = grd;
-			c.fillRect(0, 0, sizes.width, sizes.height * 5);
+			c.fillRect(0, 0, sizes.width, sizes.height * canvasScale);
+
+			particles.forEach((particle, index) => {
+				if (particle.alpha <= 0) {
+					particles.splice(index, 1);
+				} else {
+					particle.update();
+				}
+			});
+
 			for (let ball of balls) {
 				ball.update();
 				if (ball.y + ball.r > Yscroll) {
@@ -381,6 +514,12 @@ function home() {
 							resolveCollision(ball, fixedball);
 						}
 					});
+					// for brusting ball
+					if (ball.y >= sizes.height * 5) {
+						setTimeout(() => {
+							ball.touched = 6;
+						}, randomIntFromRange(1500, 2500));
+					}
 				} else {
 					ball.dy = 0.01;
 				}
@@ -681,6 +820,7 @@ function home() {
 
 		addListenerOnMessagelinks();
 	}
+
 	handleSingleProjectPage();
 	addAnimToMainText();
 }
@@ -704,6 +844,14 @@ function about() {
 		});
 	}
 	animOnDownArrow();
+
+	window.addEventListener("resize", () => {
+		resetCanvas();
+
+		for (let i = 0; i < ids.length; i++) {
+			cancelAnimationFrame(ids[i]);
+		}
+	});
 
 	class SmallShapes {
 		constructor(x, y, shape, color, r, isHollow, ctx, lineWidth) {
@@ -781,40 +929,56 @@ function about() {
 
 	let shapes = [];
 	let allctx = [];
+	let ids = [];
+
+	let scale = window.devicePixelRatio;
 
 	let allCanvas = document.getElementsByClassName("card1-canvas");
 	let card = document
 		.getElementsByClassName("one-card")[0]
 		.getBoundingClientRect();
 
-	for (let i = 0; i < allCanvas.length; i++) {
-		let canvas = allCanvas[i];
-		let ctx = canvas.getContext("2d");
-		allctx.push(ctx);
-		let width = card.width;
-		let height = card.height;
+	function resetCanvas() {
+		shapes = [];
+		allctx = [];
+		scale = window.devicePixelRatio;
 
-		canvas.style.width = width + "px";
-		canvas.style.height = height + "px";
+		allCanvas = document.getElementsByClassName("card1-canvas");
+		card = document
+			.getElementsByClassName("one-card")[0]
+			.getBoundingClientRect();
 
-		var scale = window.devicePixelRatio;
-		canvas.width = width * scale;
-		canvas.height = height * scale;
+		for (let i = 0; i < allCanvas.length; i++) {
+			let canvas = allCanvas[i];
+			let ctx = canvas.getContext("2d");
+			allctx.push(ctx);
+			let width = card.width;
+			let height = card.height;
 
-		ctx.scale(scale / 2, scale / 2);
+			canvas.style.width = width + "px";
+			canvas.style.height = height + "px";
+
+			if (scale >= 2) {
+				canvas.width = width * scale;
+				canvas.height = height * scale;
+				ctx.scale(scale / 2, scale / 2);
+			} else {
+				canvas.width = width;
+				canvas.height = height;
+				ctx.scale(scale, scale);
+			}
+		}
+
+		enableMouseEvent();
+		createCanvasObjects();
+		animate1(allctx[0], 0);
+		animate2(allctx[1], 1);
+		animate3(allctx[2], 2);
+		animate4(allctx[3], 3);
 	}
+	resetCanvas();
 
 	function createCanvasObjects() {
-		let colors = [
-			"#39FF71",
-			"#A181FF",
-			"#A5C93E",
-			"#4B6FF0",
-			"#FF39B0",
-			"#F0CC4B",
-			"#3D39FF",
-		];
-
 		for (let j = 0; j < allctx.length; j++) {
 			let temp = [];
 			for (let i = 0; i < 7; i++) {
@@ -827,7 +991,7 @@ function about() {
 					y,
 					shape,
 					colors[i],
-					randomIntFromRange(10, 20),
+					randomIntFromRange(3, 8) * scale,
 					isHollow,
 					allctx[j],
 					randomIntFromRange(10, 16)
@@ -839,52 +1003,53 @@ function about() {
 		}
 	}
 
-	let cards = document.getElementsByClassName("one-card");
+	function enableMouseEvent() {
+		let cards = document.getElementsByClassName("one-card");
 
-	let ids = [];
-	for (let i = 0; i < cards.length; i++) {
-		cards[i].addEventListener("click", () => {
-			for (let j = 0; j < 7; j++) {
-				shapes[i][j].dx = randomIntFromRange(-6, 6);
-				shapes[i][j].dy = randomIntFromRange(-6, 6);
-				shapes[i][j].shape =
-					randomIntFromRange(0, 2) > 1 ? "rect" : "circle";
-			}
-			switch (i) {
-				case 0:
-					cancelAnimationFrame(ids[0]);
-					animate1(allctx[0], 0);
-					setTimeout(() => {
+		for (let i = 0; i < cards.length; i++) {
+			cards[i].addEventListener("mouseenter", () => {
+				for (let j = 0; j < 7; j++) {
+					shapes[i][j].dx = randomIntFromRange(6, 8);
+					shapes[i][j].dy = randomIntFromRange(6, 8);
+					shapes[i][j].shape =
+						randomIntFromRange(0, 2) > 1 ? "rect" : "circle";
+				}
+				switch (i) {
+					case 0:
 						cancelAnimationFrame(ids[0]);
-					}, 3000);
-					break;
-				case 1:
-					cancelAnimationFrame(ids[1]);
-					animate2(allctx[1], 1);
-					setTimeout(() => {
+						animate1(allctx[0], 0);
+						setTimeout(() => {
+							cancelAnimationFrame(ids[0]);
+						}, 3000);
+						break;
+					case 1:
 						cancelAnimationFrame(ids[1]);
-					}, 3000);
-					break;
-				case 2:
-					cancelAnimationFrame(ids[2]);
-					animate3(allctx[2], 2);
-					setTimeout(() => {
+						animate2(allctx[1], 1);
+						setTimeout(() => {
+							cancelAnimationFrame(ids[1]);
+						}, 3000);
+						break;
+					case 2:
 						cancelAnimationFrame(ids[2]);
-					}, 3000);
-					break;
-				case 3:
-					cancelAnimationFrame(ids[3]);
-					animate4(allctx[3], 3);
-					setTimeout(() => {
+						animate3(allctx[2], 2);
+						setTimeout(() => {
+							cancelAnimationFrame(ids[2]);
+						}, 3000);
+						break;
+					case 3:
 						cancelAnimationFrame(ids[3]);
-					}, 3000);
-					break;
-				case 4:
-					break;
-				default:
-					break;
-			}
-		});
+						animate4(allctx[3], 3);
+						setTimeout(() => {
+							cancelAnimationFrame(ids[3]);
+						}, 3000);
+						break;
+					case 4:
+						break;
+					default:
+						break;
+				}
+			});
+		}
 	}
 
 	function animate1(tempCtx, i) {
@@ -921,12 +1086,6 @@ function about() {
 		ids[3] = requestAnimationFrame(animate4.bind(null, tempCtx, i));
 	}
 
-	createCanvasObjects();
-	animate1(allctx[0], 0);
-	animate2(allctx[1], 1);
-	animate3(allctx[2], 2);
-	animate4(allctx[3], 3);
-
 	setTimeout(() => {
 		for (let i = 0; i < ids.length; i++) {
 			cancelAnimationFrame(ids[i]);
@@ -936,12 +1095,7 @@ function about() {
 
 window.onload = function () {
 	let url = window.location.href;
-	if (
-		url != "http://127.0.0.1:5500/port/about.html" ||
-		"https://lovekesh9896.github.io/portfolio/about" ||
-		"http://127.0.0.1:5500/port/about" ||
-		"https://lovekesh9896.github.io/portfolio/about.html"
-	) {
+	if (url == "http://127.0.0.1:5500/port/index.html") {
 		console.log("home");
 		home();
 	} else {

@@ -17,6 +17,7 @@ body {
 	overflow-y: hidden;
 	overflow-x: hidden;
 	user-select: none;
+	background: linear-gradient(to right, #6441a5, #2a0845);
 	scroll-behavior: smooth;
 }
 
@@ -50,8 +51,10 @@ ul.transition li {
 	height: 100vh;
 	display: flex;
 	position: absolute;
-	top: 20vh;
-	left: 10vw;
+	top: 0;
+	left: 0;
+	padding-top: 20vh;
+	padding-left: 10vw;
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
@@ -189,7 +192,7 @@ ul.transition li {
 
 /* -------------- section 2 ------------------ */
 #section2-container {
-	margin-top: -400vh;
+	margin-top: -500vh;
 	z-index: 2000;
 	display: none;
 }
@@ -202,6 +205,10 @@ ul.transition li {
 .section2 > div {
 	width: 50%;
 	height: 100vh;
+}
+
+.inverted-flex {
+	flex-direction: row-reverse;
 }
 
 .left-section {
@@ -251,8 +258,8 @@ model-viewer {
 	width: 100%;
 	height: 100%;
 	background-color: white;
-	border-top-left-radius: 50%;
-	border-bottom-left-radius: 50%;
+	border-top-left-radius: 100%;
+	border-bottom-left-radius: 100%;
 	overflow: hidden;
 }
 
@@ -266,13 +273,8 @@ model-viewer::part(default-progress-bar) {
 
 .reverse-border-radius {
 	border-radius: 0;
-	border-top-right-radius: 50%;
-	border-bottom-right-radius: 50%;
-}
-
-.reverse-border-radius-less {
-	border-top-right-radius: 50%;
-	border-bottom-right-radius: 0;
+	border-top-right-radius: 100%;
+	border-bottom-right-radius: 100%;
 }
 
 /* animation of div */
@@ -488,10 +490,45 @@ model-viewer::part(default-progress-bar) {
 	left: 0;
 }
 
+/* other projects */
+.other-projects ul {
+	margin-left: 20px;
+}
+.other-projects li {
+	list-style-type: disc;
+	font-size: 1.3rem;
+	margin-bottom: 10px;
+	cursor: pointer;
+	width: max-content;
+}
+
+.other-projects li svg {
+	width: 1.5rem;
+	margin-left: 6px;
+	transition: 0.5s;
+}
+
+.other-projects li:hover > svg {
+	margin-left: 14px;
+}
+
+.other-h4-container {
+	font-size: 1.1rem;
+	margin-top: 20vh;
+	position: sticky;
+	top: 84vh;
+}
+
+.other-projects li a {
+	text-decoration: none;
+	color: white;
+}
+
 /* about */
 .about {
 	font-family: "Poppins", sans-serif;
 	padding: 16vh 6vw;
+	background-color: white;
 }
 
 #img-and-info {
@@ -522,7 +559,6 @@ model-viewer::part(default-progress-bar) {
 }
 
 .about-right {
-	padding-top: 40px;
 	flex-basis: 50%;
 }
 
@@ -671,6 +707,7 @@ h1 {
 	display: flex;
 	justify-content: space-around;
 	margin-bottom: 60px;
+	flex-wrap: wrap;
 }
 
 .one-card {
@@ -680,7 +717,7 @@ h1 {
 	border-radius: 16px;
 	display: flex;
 	flex-direction: column;
-	min-width: 500px;
+	min-width: 400px;
 	max-width: 600px;
 	background: url("../images/Union.png");
 	background-repeat: no-repeat;
@@ -688,7 +725,7 @@ h1 {
 	position: relative;
 	overflow: hidden;
 	user-select: none;
-	cursor: pointer;
+	z-index: 1;
 }
 
 .one-card h3 {
@@ -785,45 +822,98 @@ h1 {
 	left: 0;
 }
 
-@media screen and (max-width: 800px) {
-	.arrow img {
-		display: none;
+@media screen and (max-width: 1200px) {
+	#section2-container {
+		margin-top: 0;
 	}
-	.arrow2 {
-		margin: 0;
-		margin-top: 100px;
+}
+
+@media screen and (max-width: 1000px) {
+	#section2-container {
+		margin-top: 0;
 	}
-	.arrow2 img {
-		display: none;
+	model-viewer,
+	.reverse-border-radius {
+		border-radius: 0;
 	}
 
-	.of h2 {
-		top: 60px;
-		left: 200px;
+	/* about page */
+	.about {
+		padding: 10vh 6vw;
+	}
+	#img-and-info {
+		flex-direction: column;
+	}
+	.about-left img {
+		width: 40%;
+		margin-bottom: 40px;
+	}
+	.cards-container {
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.one-card {
+		margin-top: 30px;
+		width: 60%;
+	}
+}
+
+@media screen and (max-width: 800px) {
+	/* for projects */
+	.inverted-flex,
+	.section2 {
+		flex-direction: column-reverse;
+	}
+
+	.section2 > div {
+		width: 100%;
+		height: 70vh;
+	}
+
+	.line2 img {
+		display: none;
 	}
 
 	.brackets {
 		display: none;
+		overflow: hidden;
 	}
-	.of img {
-		display: none;
+
+	.other-projects .left-section {
+		margin-top: 50px;
+	}
+	.other-h4-container {
+		margin-top: 40px;
+		margin-bottom: 4vh;
+		width: 80%;
+	}
+
+	/* about */
+	.about-left img {
+		width: 100%;
 	}
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 600px) {
 	.main-content {
 		font-size: 1.5rem;
 		line-height: normal;
 	}
-	.arrow2 {
-		margin: 0;
-		margin-top: 60px;
-	}
-	.of h2 {
-		left: 120px;
-	}
-}
 
-.inverted-flex {
-	flex-direction: row-reverse;
+	/* about */
+
+	.one-card {
+		width: 90%;
+	}
+
+	.social {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+
+	.resume {
+		margin-top: 40px;
+		margin-left: 0;
+	}
 }
