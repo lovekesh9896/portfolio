@@ -1,6 +1,6 @@
-window.onbeforeunload = function () {
-	window.scrollTo(0, 0);
-};
+// window.onbeforeunload = function () {
+// 	window.scrollTo(0, 0);
+// };
 let colors = [
 	"#39FF71",
 	"#A181FF",
@@ -975,6 +975,8 @@ function about() {
 		animate2(allctx[1], 1);
 		animate3(allctx[2], 2);
 		animate4(allctx[3], 3);
+		animate5(allctx[4], 4);
+		animate6(allctx[5], 5);
 	}
 	resetCanvas();
 
@@ -1044,6 +1046,18 @@ function about() {
 						}, 3000);
 						break;
 					case 4:
+						cancelAnimationFrame(ids[4]);
+						animate5(allctx[4], 4);
+						setTimeout(() => {
+							cancelAnimationFrame(ids[4]);
+						}, 3000);
+						break;
+					case 5:
+						cancelAnimationFrame(ids[5]);
+						animate6(allctx[5], 5);
+						setTimeout(() => {
+							cancelAnimationFrame(ids[5]);
+						}, 3000);
 						break;
 					default:
 						break;
@@ -1054,8 +1068,8 @@ function about() {
 
 	function animate1(tempCtx, i) {
 		tempCtx.fillStyle = "white";
-		console.log("1");
 		tempCtx.fillRect(0, 0, card.width * scale, card.height * scale);
+
 		for (let object of shapes[i]) {
 			object.update();
 		}
@@ -1084,6 +1098,22 @@ function about() {
 			object.update();
 		}
 		ids[3] = requestAnimationFrame(animate4.bind(null, tempCtx, i));
+	}
+	function animate5(tempCtx, i) {
+		tempCtx.fillStyle = "white";
+		tempCtx.fillRect(0, 0, card.width * scale, card.height * scale);
+		for (let object of shapes[i]) {
+			object.update();
+		}
+		ids[4] = requestAnimationFrame(animate5.bind(null, tempCtx, i));
+	}
+	function animate6(tempCtx, i) {
+		tempCtx.fillStyle = "white";
+		tempCtx.fillRect(0, 0, card.width * scale, card.height * scale);
+		for (let object of shapes[i]) {
+			object.update();
+		}
+		ids[5] = requestAnimationFrame(animate6.bind(null, tempCtx, i));
 	}
 
 	setTimeout(() => {

@@ -721,13 +721,28 @@ h1 {
 	flex-direction: column;
 	min-width: 400px;
 	max-width: 600px;
-	background: url("../images/Union.png");
-	background-repeat: no-repeat;
-	background-size: contain;
 	position: relative;
 	overflow: hidden;
 	user-select: none;
-	z-index: 1;
+	z-index: 2;
+	transition: 0.4s;
+}
+
+.one-card:hover {
+	box-shadow: 0px 1.5773361921310425px 2.462858200073242px 0px #00000000,
+		0px 3.790558099746704px 5.918591022491455px 0px #00000000,
+		0px 7.137284755706787px 11.144181251525879px 0px #00000000,
+		0px 12.731696128845215px 19.879314422607422px 0px #00000006,
+		0px 23.8132381439209px 37.182071685791016px 0px #0000000d,
+		0px 57px 89px 0px #00000017;
+}
+
+.one-card::after {
+	content: url("../images/Union.png");
+	position: absolute;
+	top: -10%;
+	left: -33%;
+	z-index: -1;
 }
 
 .one-card h3 {
@@ -766,6 +781,19 @@ h1 {
 .link a {
 	text-decoration: none;
 	color: white;
+}
+
+.linke-container {
+	display: flex;
+	align-items: center;
+}
+
+.linke-container .strong {
+	font-weight: 500;
+}
+
+.review-info {
+	margin-left: 20px;
 }
 
 .logo img {
@@ -918,5 +946,10 @@ h1 {
 	.resume {
 		margin-top: 40px;
 		margin-left: 0;
+	}
+
+	#arrow-down {
+		transform: translate(0);
+		opacity: 1;
 	}
 }
