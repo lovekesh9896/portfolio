@@ -193,7 +193,7 @@ ul.transition li {
 /* -------------- section 2 ------------------ */
 #section2-container {
 	margin-top: -500vh;
-	z-index: 2000;
+	/* z-index: 20; */
 	display: none;
 }
 .section2 {
@@ -312,14 +312,12 @@ model-viewer::part(default-progress-bar) {
 .animate-left-section {
 	width: 70%;
 	display: flex;
+	flex-direction: column;
 	align-items: center;
 	justify-content: center;
 	position: relative;
 	overflow: hidden;
-}
-
-.animate-left-section video {
-	width: 80%;
+	z-index: 200;
 }
 
 .animate-left-section::after {
