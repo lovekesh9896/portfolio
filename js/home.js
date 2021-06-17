@@ -1124,8 +1124,9 @@ function about() {
 }
 
 window.onload = function () {
-	let url = window.location.href;
-	if (url == "http://127.0.0.1:5500/port/index.html") {
+	let url = window.location.pathname.split("/").pop();
+	console.log(url);
+	if (url == "index.html") {
 		console.log("home");
 		home();
 	} else {
