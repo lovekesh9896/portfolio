@@ -553,275 +553,6 @@ function home() {
 	}
 
 	handleHomePageCanvas();
-
-	function handleSingleProjectPage() {
-		let projects = document.getElementsByClassName("view-project");
-		let div = document.getElementById("div-animate");
-		let i = 0;
-
-		for (let i = 0; i < projects.length; i++) {
-			projects[i].addEventListener("click", (e) => {
-				console.log("yes");
-				div.style.display = "flex";
-				div.classList.add("anim");
-			});
-		}
-
-		function similarity(s1, s2) {
-			var longer = s1;
-			var shorter = s2;
-			if (s1.length < s2.length) {
-				longer = s2;
-				shorter = s1;
-			}
-			var longerLength = longer.length;
-			if (longerLength == 0) {
-				return 1.0;
-			}
-			return (
-				(longerLength - editDistance(longer, shorter)) /
-				parseFloat(longerLength)
-			);
-		}
-
-		function editDistance(s1, s2) {
-			s1 = s1.toLowerCase();
-			s2 = s2.toLowerCase();
-
-			var costs = new Array();
-			for (var i = 0; i <= s1.length; i++) {
-				var lastValue = i;
-				for (var j = 0; j <= s2.length; j++) {
-					if (i == 0) costs[j] = j;
-					else {
-						if (j > 0) {
-							var newValue = costs[j - 1];
-							if (s1.charAt(i - 1) != s2.charAt(j - 1))
-								newValue =
-									Math.min(
-										Math.min(newValue, lastValue),
-										costs[j]
-									) + 1;
-							costs[j - 1] = lastValue;
-							lastValue = newValue;
-						}
-					}
-				}
-				if (i > 0) costs[s2.length] = lastValue;
-			}
-			return costs[s2.length];
-		}
-
-		// handling messages
-		let questions = [
-			"hi",
-			"hey",
-			"hello",
-			"how are you",
-			"how are things",
-			"what is going on",
-			"what is up",
-			"bye",
-			"good bye",
-			"goodbye",
-			"what is your name",
-			"your name",
-			"tell me about yourself",
-			"give me your description",
-			"your description",
-			"what are you made up of",
-			"technologies",
-			"your friends",
-			"friends",
-			"birthday",
-			"date of birth",
-			"how old are you",
-			"your age",
-			"where do you live",
-			"address",
-			"who is your author",
-			"your creator",
-			"your author",
-		];
-
-		let answeres = [
-			"hello user",
-			"hello user",
-			"hello user",
-			"i am great",
-			"i am great",
-			"nothing much, just trying to be alive",
-			"nothing much, just trying to be alive",
-			"bye bye",
-			"bye bye",
-			"bye bye",
-			"Anton - The Dry Runner",
-			"Anton - The Dry Runner",
-			"I am anton - the dry runner. I live on github and i am fast and responsive",
-			"I am anton - the dry runner. I live on github and i am fast and responsive",
-			"I am anton - the dry runner. I live on github and i am fast and responsive",
-			"I am made up of Javascript, Nodejs and codemirror",
-			"I am made up of Javascript, Nodejs and codemirror",
-			"I live alone but i have good relation with Minus and Glowbadge",
-			"I live alone but i have good relation with Minus and Glowbadge",
-			"07 Feb 2017",
-			"07 Feb 2017",
-			"3 years",
-			"3 years",
-			"github",
-			"github",
-			"lovekesh",
-			"lovekesh",
-			"lovekesh",
-		];
-
-		let input = document.getElementById("message-input");
-		let messageList = document.getElementsByClassName("messages-list")[0];
-		let isInputDisabled = false;
-
-		function findTop3Suggestions(question) {
-			let ind1 = 0;
-			let ind2 = 0;
-			let ind3 = 0;
-			let a = 0;
-			let b = 0;
-			let c = 0;
-			for (let i = 0; i < questions.length; i++) {
-				let temp = similarity(question, questions[i]);
-				if (temp >= ind1) {
-					ind3 = ind2;
-					ind2 = ind1;
-					ind1 = temp;
-					c = b;
-					b = a;
-					a = i;
-				} else if (temp >= ind2) {
-					ind3 = ind2;
-					ind2 = temp;
-					c = b;
-					b = i;
-				} else if (temp > ind3) {
-					ind3 = temp;
-					c = i;
-				}
-			}
-			console.log(ind1, ind2, ind3);
-			return [question[a], questions[b], questions[c]];
-		}
-
-		function giveReply(question) {
-			let message = document.createElement("LI");
-			message.classList.add("message-left");
-			let index = -1;
-			let sim = 0;
-			for (let i = 0; i < questions.length; i++) {
-				let temp = similarity(question, questions[i]);
-				if (temp > sim) {
-					sim = temp;
-					index = i;
-				}
-			}
-			if (sim >= 0.6) {
-				message.innerText = answeres[index];
-			} else if (sim < 0.6) {
-				message.innerText = "Do you mean any of the follow?";
-				messageList.append(message);
-				// create suggestions
-				let suggestionBox = document.createElement("DIV");
-				suggestionBox.classList.add("suggestions");
-				let arr = findTop3Suggestions(question);
-				console.log(arr);
-				let str = `<li class="message-left">
-                <a class="message-link" href="">${arr[0]}</a>
-            </li>
-            <li class="message-left">
-                <a class="message-link" href=""
-                    >${arr[1]}</a
-                >
-            </li>
-            <li class="message-left">
-                <a class="message-link" href=""
-                    >${arr[2]}</a
-                >
-            </li>`;
-				console.log(
-					"simirlarity for",
-					question,
-					"is",
-					sim,
-					"with",
-					questions[index]
-				);
-				messageList.append(suggestionBox);
-				suggestionBox.innerHTML = str;
-				suggestionBox.scrollIntoView();
-				addListenerOnMessagelinks();
-				return;
-			} else {
-				message.innerText = "Sorry I don't understand";
-			}
-			console.log(
-				"simirlarity for",
-				question,
-				"is",
-				sim,
-				"with",
-				questions[index]
-			);
-			messageList.append(message);
-			message.scrollIntoView();
-		}
-
-		function addMessageToChat() {
-			if (input.value != "") {
-				let message = document.createElement("LI");
-				let messageText = input.value
-					.toLowerCase()
-					.replace(/[^\w\s\d]/gi, "");
-				message.classList.add("message-right");
-				message.innerText = messageText;
-				messageList.append(message);
-				input.value = "";
-				message.scrollIntoView();
-				isInputDisabled = true;
-				setTimeout(() => {
-					giveReply(messageText);
-					isInputDisabled = false;
-					input.focus();
-				}, 500);
-			}
-		}
-		div.addEventListener("keypress", (e) => {
-			if (e.key == "Enter") {
-				if (!isInputDisabled) {
-					addMessageToChat();
-				}
-			}
-		});
-
-		document
-			.getElementById("send-message-btn")
-			.addEventListener("click", () => {
-				if (!isInputDisabled) {
-					addMessageToChat();
-				}
-			});
-
-		function addListenerOnMessagelinks() {
-			let messageLinks = document.getElementsByClassName("message-link");
-			for (let i = 0; i < messageLinks.length; i++) {
-				messageLinks[i].addEventListener("click", (e) => {
-					e.preventDefault();
-					input.value = messageLinks[i].innerText;
-					document.getElementById("send-message-btn").click();
-				});
-			}
-		}
-
-		addListenerOnMessagelinks();
-	}
-
-	handleSingleProjectPage();
 	addAnimToMainText();
 }
 
@@ -1123,17 +854,185 @@ function about() {
 	}, 2000);
 }
 
+function project() {
+	const canvas = document.querySelector("#canvas3");
+	const c = canvas.getContext("2d");
+
+	const sizes = {
+		width: window.innerWidth,
+		height: window.innerHeight,
+	};
+
+	let grd = c.createLinearGradient(0, 0, sizes.width, 0);
+	grd.addColorStop(0, "#6441a5");
+	grd.addColorStop(1, "#2a0845");
+	c.fillStyle = grd;
+
+	canvas.width = sizes.width;
+	canvas.height = sizes.height;
+
+	// sizes
+	window.addEventListener("resize", () => {
+		sizes.width = window.innerWidth;
+		sizes.height = window.innerHeight;
+
+		canvas.width = sizes.width;
+		canvas.height = sizes.height;
+	});
+
+	let balls = [];
+
+	class Ball {
+		constructor(x, y, dx, dy, r, color) {
+			this.x = x;
+			this.y = y;
+			this.r = r;
+			this.dx = dx;
+			this.dy = dy;
+			this.color = color;
+			this.id = Math.random();
+		}
+
+		draw() {
+			c.fillStyle = this.color;
+			c.beginPath();
+			c.arc(this.x, this.y, this.r, 0, 2 * Math.PI);
+			c.fill();
+		}
+
+		update() {
+			if (this.y + this.r >= sizes.height || this.y - this.r <= 0) {
+				this.dy = -this.dy;
+			}
+			if (this.x + this.r >= canvas.width || this.x - this.r <= 0) {
+				this.dx = -this.dx;
+			}
+
+			this.x += this.dx;
+			this.y += this.dy;
+
+			this.draw();
+		}
+	}
+
+	function randomIntFromRange(min, max) {
+		return Math.random() * (max - min + 1) + min;
+	}
+
+	function generateMore() {
+		setInterval(() => {
+			if (!document.hidden && balls.length < 7) {
+				let numberOfBalls = Math.floor(randomIntFromRange(1, 3));
+				for (let i = 0; i < numberOfBalls; i++) {
+					let radius = Math.floor(randomIntFromRange(10, 30));
+					let x = Math.floor(randomIntFromRange(radius, sizes.width));
+					let y = Yscroll - radius;
+					balls.push(new Ball(x, y, dx, dy, radius));
+				}
+			}
+		}, 4000);
+	}
+
+	function init() {
+		let numberOfBalls = Math.floor(randomIntFromRange(8, 12));
+		for (let i = 0; i < numberOfBalls; i++) {
+			let radius = randomIntFromRange(30, 60);
+			let x = Math.floor(randomIntFromRange(radius, sizes.width));
+			let y = Math.floor(randomIntFromRange(radius, sizes.height));
+			let dx = randomIntFromRange(-1, 1);
+			let dy = randomIntFromRange(-1, 1);
+			let color = colors[Math.floor(randomIntFromRange(0, 6))];
+			balls.push(new Ball(x, y, dx, dy, radius, color));
+		}
+		generateMore();
+	}
+
+	function checkCollision(ballA, ballB) {
+		let rSum = ballA.r + ballB.r;
+		let dx = ballB.x - ballA.x;
+		let dy = ballB.y - ballA.y;
+
+		return [
+			rSum * rSum > dx * dx + dy * dy,
+			rSum - Math.sqrt(dx * dx + dy * dy),
+		];
+	}
+
+	function resolveCollision(ballA, ballB) {
+		let relVel = [ballB.dx - ballA.dx, ballB.dy - ballA.dy];
+		let norm = [ballB.x - ballA.x, ballB.y - ballA.y];
+		let mag = Math.sqrt(norm[0] * norm[0] + norm[1] * norm[1]);
+		norm = [norm[0] / mag, norm[1] / mag];
+
+		let velAlongNorm = relVel[0] * norm[0] + relVel[1] * norm[1];
+		if (velAlongNorm > 0) return;
+
+		let bounce = 0.7;
+		let j = -(1 + bounce) * velAlongNorm;
+		j /= 1 / ballA.r + 1 / ballB.r;
+
+		let impulse = [j * norm[0], j * norm[1]];
+		ballA.dx -= (1 / ballA.r) * impulse[0];
+		ballA.dy -= (1 / ballA.r) * impulse[1];
+	}
+
+	function adjustPositions(ballA, ballB, depth) {
+		const percent = 0.2;
+		const slop = 0.01;
+		let correction =
+			(Math.max(depth - slop, 0) / (1 / ballA.r + 1 / ballB.r)) * percent;
+
+		let norm = [ballB.x - ballA.x, ballB.y - ballA.y];
+		let mag = Math.sqrt(norm[0] * norm[0] + norm[1] * norm[1]);
+		norm = [norm[0] / mag, norm[1] / mag];
+		correction = [correction * norm[0], correction * norm[1]];
+		ballA.x -= (1 / ballA.r) * correction[0];
+		ballA.y -= (1 / ballA.r) * correction[1];
+	}
+
+	function animate() {
+		c.fillStyle = grd;
+		c.fillRect(0, 0, sizes.width, sizes.height);
+
+		for (let ball of balls) {
+			ball.update();
+			for (let ball2 of balls) {
+				if (ball !== ball2) {
+					let collision = checkCollision(ball, ball2);
+					if (collision[0]) {
+						adjustPositions(ball, ball2, collision[1]);
+						resolveCollision(ball, ball2);
+					}
+				}
+			}
+		}
+		requestAnimationFrame(animate);
+	}
+
+	animate();
+
+	// setTimeout(() => {
+	init();
+	// document.body.style["overflow-y"] = "unset";
+	// document.body.style.height = "unset";
+	// }, 2000);
+}
+
 window.onload = function () {
 	let url = window.location.pathname.split("/").pop();
 	console.log(url);
 	if (url == "index.html") {
 		console.log("home");
 		home();
-	} else {
+	} else if (url == "about.html") {
 		console.log("about");
 		document.body.style["overflow-y"] = "unset";
 		document.body.style.height = "unset";
 		about();
+	} else {
+		document.body.style["overflow-y"] = "unset";
+		document.body.style.height = "unset";
+		project();
 	}
 };
 function pageTransition() {
@@ -1191,22 +1090,21 @@ barba.init({
 			async enter(data) {
 				contentAnimation();
 				window.scrollTo(0, 0);
-			},
-
-			async after() {
-				(function () {
-					let url = window.location.href;
-					console.log(url);
-					if (url == "http://127.0.0.1:5500/port/index.html") {
-						console.log("line 1007 home");
-						home();
-					} else {
-						console.log("about");
-						document.body.style["overflow-y"] = "unset";
-						document.body.style.height = "unset";
-						about();
-					}
-				})();
+				let url = window.location.pathname.split("/").pop();
+				console.log(url);
+				if (url == "index.html") {
+					console.log("home");
+					home();
+				} else if (url == "about.html") {
+					console.log("about");
+					document.body.style["overflow-y"] = "unset";
+					document.body.style.height = "unset";
+					about();
+				} else {
+					document.body.style["overflow-y"] = "unset";
+					document.body.style.height = "unset";
+					project();
+				}
 			},
 
 			async once(data) {
