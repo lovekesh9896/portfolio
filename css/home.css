@@ -826,6 +826,11 @@ h1 {
 		width: 80%;
 	}
 
+	.project .content-container {
+		width: 100vw;
+		margin: 0;
+	}
+
 	/* about */
 	.about-left img {
 		width: 100%;
@@ -836,6 +841,11 @@ h1 {
 	.main-content {
 		font-size: 1.5rem;
 		line-height: normal;
+	}
+
+	/* projects */
+	.project .content-container {
+		padding: 40px;
 	}
 
 	/* about */
@@ -858,5 +868,18 @@ h1 {
 	#arrow-down {
 		transform: translate(0);
 		opacity: 1;
+	}
+
+	.link-and-logo {
+		flex-direction: column;
+	}
+
+	.logo {
+		width: 50%;
+		margin-top: 40px;
+	}
+
+	.logo img {
+		width: 100%;
 	}
 }
