@@ -529,9 +529,9 @@ function home() {
 
 		animate();
 		drawFixedBalls();
+		init();
 
 		setTimeout(() => {
-			init();
 			document.body.style["overflow-y"] = "unset";
 			document.body.style.height = "unset";
 		}, 2000);
@@ -1021,7 +1021,7 @@ function project() {
 window.onload = function () {
 	let url = window.location.pathname.split("/").pop();
 	console.log(url);
-	if (url == "index.html") {
+	if (url == "index.html" || url == "") {
 		console.log("home");
 		home();
 	} else if (url == "about.html") {
