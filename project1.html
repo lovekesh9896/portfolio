@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Project 1</title>
+		<link rel="stylesheet" href="./css/home.css" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+			rel="stylesheet"
+		/>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Aldrich&display=swap"
+			rel="stylesheet"
+		/>
+	</head>
+	<body data-barba="wrapper">
+		<ul class="transition">
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+
+		<main
+			data-barba="container"
+			class="project"
+			data-barba-namespace="project1"
+		>
+			<canvas id="canvas3"></canvas>
+
+			<div class="content-container">
+				<div class="video-container">
+					<iframe
+						width="800"
+						height="415"
+						src="https://www.youtube-nocookie.com/embed/u15gKhZA66k"
+						title="YouTube video player"
+						frameborder="0"
+						allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+						allowfullscreen
+					></iframe>
+				</div>
+				<div class="content">
+					<div class="one-project-name">
+						<h1>Dry Runner</h1>
+						<a href="" class="one-project-link"
+							><span> Link To The Project</span></a
+						>
+					</div>
+					<p class="one-project-intro">
+						This website can create a recursion tree of any java
+						code. And not just a recursion tree it can also help one
+						visualize how function calling works in java code. In
+						this page I am going to explain the project. You can
+						either watch the video for demo or study about project
+						below.
+					</p>
+					<h3>Project Context ✍🏻</h3>
+					<ul>
+						<li>Open Source</li>
+						<li>Data Structures and Algorithmss</li>
+						<li>Java</li>
+					</ul>
+					<h3>Tools Used 🛠🔎</h3>
+					<ul>
+						<li>HTML, CSS, Js</li>
+						<li>Nodejs</li>
+					</ul>
+
+					<h3 class="extra-highlight">How To Use :</h3>
+					<p>
+						In the left sanction there is “How to use”, “Feedback”,
+						and “Contribution” guide of the website. In the top
+						right section there are some social buttons and a theme
+						change dropdown for the editor themes. Below that we
+						have the code editor and then there are 2 buttons for
+						custom input and submit code.
+					</p>
+					<p>
+						To use the website just paste your java code in the
+						editor, put custom input if any and then click submit.
+						Then the website will take some time to analyze the code
+						and create a JSON object for its function calling. It
+						will copy the code to your clipboard and open another
+						website
+						<a href="https://vanya.jp.net/vtree/"
+							>vanya.jp.net/tree</a
+						>
+						. Paste your clipboard content in the textarea and your
+						recursion tree is ready. It uses another website for
+						JSON tree view. I will talk about it again at the end of
+						the video.
+					</p>
+
+					<h3 class="extra-highlight">How it works :</h3>
+					<p>
+						For detailed code explanation please see my other video
+						from the description below, here i will explain just the
+						basics of how the code works. First when you enter your
+						code in editor and press submit the website will send
+						the code to the backend. Backend of the website is
+						created with nodejs. First the code will be run once and
+						checked for runtime and syntax errors. If there is a
+						problem it will send an error message to the frontend.
+						If there is no problem then we will start to change the
+						code. We will basically add print statements to all the
+						functions using string manipulation and other ds like
+						stack. We will add print statements to start of function
+						and end of every function like just before the return or
+						when the function is ended. Then we will run the code
+						again and copy the output of our new code. It will look
+						something like this. Then we will create the json object
+						from this out and send it to the frontend. The object is
+						then copied to clipboard and a new website will be
+						opened where you paste your code for tree view.
+					</p>
+
+					<h3 class="extra-highlight">Where it can be improved :</h3>
+					<p>
+						If you are interested in contributing to the project you
+						are most welcome. The website can be improved on both
+						frontend and backend. A detailed instruction of how to
+						start the project is available on github and the link to
+						github is in the description. Just use the website, if
+						you think you can improve in anything open an issue and
+						start working on it. From my side, first I would love to
+						add support for other languages. So if you know any
+						other language and nodejs (or just js) you can add
+						support for that language. There are some websites which
+						already create recursion trees for python but their
+						functionality is also limited. There are also some edge
+						cases where code fails to add extra statements like when
+						the user doesn’t use curly brackets for if else
+						statements and adds a return statement and when the main
+						function is not the last function, etc. In the frontend
+						I think adding our own tree view will be great. I am
+						already working on it but if you have any other ideas
+						you are welcome to contribute.
+					</p>
+
+					<h3 class="extra-highlight">
+						How is it different from other websites :
+					</h3>
+					<p>
+						There are some websites which create recursion trees of
+						python code with much more beautiful animations but
+						working is very limited. Either they work for some fixed
+						codes or they only allow 1 function which will work in
+						recursion. But in the real world we often use different
+						functions to run the code, some of them might be using
+						recursion, others may just keep calling another function
+						again and again. So this website handles all those use
+						cases. And it's very customizable. Like you can add as
+						many functions as you want, you can add different
+						languages support with ease, you can choose what you
+						want to show in your recursion tree etc.
+					</p>
+
+					<h3 class="extra-highlight">Where it can be used :</h3>
+					<p>
+						We can use it on our day to day basis to debug our code.
+						But it can also be used by code challenge websites like
+						leetcode or codeforces. User can add his code to see
+						where his code is not working. We can calculate the
+						number of times a function is called with the same
+						parameters and tell the user how much his algorithm can
+						be improved to the same time and space complexity. We
+						can calculate code efficiency with these algorithms.
+					</p>
+				</div>
+			</div>
+
+			<div id="links">
+				<p>
+					<a class="second" href="./index.html">HOME </a>
+				</p>
+				<p><a class="second" href="./about.html">ABOUT</a></p>
+			</div>
+		</main>
+
+		<script src="https://cdn.jsdelivr.net/npm/@barba/core"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/gsap.min.js"></script>
+
+		<script src="./js/home.js"></script>
+	</body>
+</html>

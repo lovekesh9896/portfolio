@@ -4,13 +4,11 @@
 	box-sizing: border-box;
 	font-weight: 100;
 }
-@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Monda&display=swap");
 
 body {
 	margin: 0;
 	padding: 0;
-	font-family: "Montez", cursive;
+	font-family: "Aldrich", cursive;
 	font-size: 1rem;
 	width: 100vw;
 	height: 100vh;
@@ -244,13 +242,17 @@ ul.transition li {
 	width: max-content;
 }
 
+.view-project a {
+	color: white;
+}
+
 .view-project svg {
 	width: 1.5rem;
 	margin-left: 6px;
 	transition: 0.5s;
 }
 
-.view-project:hover > svg {
+.view-project a:hover > svg {
 	margin-left: 14px;
 }
 
@@ -277,175 +279,6 @@ model-viewer::part(default-progress-bar) {
 	border-bottom-right-radius: 100%;
 }
 
-/* animation of div */
-@keyframes ani {
-	from {
-		border-radius: 50%;
-		width: 0;
-		height: 0;
-	}
-	to {
-		border-radius: 0;
-		width: 100%;
-		height: 100%;
-	}
-}
-
-#div-animate {
-	display: none;
-	font-family: "Poppins", sans-serif;
-}
-
-.anim {
-	position: fixed;
-	background-color: white;
-	left: 0;
-	bottom: 0;
-	animation: ani 0.6s 1;
-	animation-fill-mode: both;
-}
-
-#div-animate > div {
-	height: 100vh;
-}
-
-.animate-left-section {
-	width: 70%;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	position: relative;
-	overflow: hidden;
-	z-index: 200;
-}
-
-.animate-left-section::after {
-	position: absolute;
-	content: "";
-	width: 120px;
-	height: 120px;
-	background: #fec601;
-	right: -60px;
-	top: -60px;
-	border-radius: 50%;
-	z-index: -1;
-}
-
-.animate-left-section::before {
-	position: absolute;
-	content: "";
-	width: 120px;
-	height: 120px;
-	background-color: #23689b;
-	left: -60px;
-	bottom: -60px;
-	border-radius: 50%;
-	z-index: -1;
-}
-.animate-right-section {
-	width: 30%;
-	position: relative;
-}
-
-.top {
-	width: 100%;
-	height: 10%;
-	padding: 10px 20px;
-	display: flex;
-	align-items: center;
-	box-shadow: 0px 1px 2px 0px #00000040;
-}
-
-.middle {
-	background-color: #f2f4f9;
-	position: relative;
-	padding: 10px 30px;
-	height: 80%;
-	overflow-y: scroll;
-}
-
-.messages-list {
-	list-style-type: none;
-}
-
-.messages-list a {
-	color: #0067dd;
-	font-weight: 400;
-	text-decoration: none;
-}
-
-.messages-list li {
-	width: 70%;
-	margin-top: 10px;
-	border-radius: 10px;
-	background-color: white;
-	padding: 10px;
-}
-
-.message-left {
-	position: relative;
-	left: 0;
-}
-
-.suggestions {
-	margin-top: 10px;
-	border-radius: 10px;
-	overflow: hidden;
-}
-
-.suggestions .message-left {
-	margin-top: 0;
-	border-radius: 0;
-	border-bottom: 1px solid #ccc;
-}
-
-.message-right {
-	position: relative;
-	left: 30%;
-}
-
-.bottom {
-	height: 10%;
-	width: 100%;
-	position: absolute;
-	background-color: #f2f4f9;
-	padding: 10px 20px;
-	position: relative;
-}
-
-.bottom input {
-	width: 100%;
-	height: 100%;
-	background: #f0f7ff;
-	border: 2px solid #d3e7ff;
-	border-radius: 40px;
-	outline: none;
-	padding-left: 10px;
-	font-size: large;
-}
-
-#send-message-btn {
-	position: absolute;
-	right: 20px;
-	top: 10px;
-	width: 60px;
-	outline: none;
-	border: none;
-	background: transparent;
-	cursor: pointer;
-}
-
-#send-message-btn img {
-	width: 100%;
-}
-
-::placeholder {
-	/* Chrome, Firefox, Opera, Safari 10.1+ */
-	color: #0067dd;
-	opacity: 1; /* Firefox */
-}
-
 #links {
 	position: fixed;
 	bottom: 4vh;
@@ -461,6 +294,8 @@ model-viewer::part(default-progress-bar) {
 
 #links a {
 	color: white;
+	text-align: none;
+	text-decoration: none;
 }
 
 .link-highlight {
@@ -813,7 +648,6 @@ h1 {
 	right: 4vw;
 	font-size: 26px;
 	z-index: 10;
-	font-family: cursive;
 }
 
 #links-about p {
@@ -848,6 +682,80 @@ h1 {
 #links-about .second:hover::after {
 	width: 100%;
 	left: 0;
+}
+
+/* projects */
+.project {
+	font-family: "Poppins", sans-serif;
+}
+
+.project a {
+	color: #00fff0;
+}
+
+.project #links a {
+	text-decoration: none;
+}
+
+.project canvas {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: -1;
+}
+
+.project .content-container {
+	color: white;
+	width: 80vw;
+	z-index: 2;
+	margin: 0 10vw;
+	margin-top: 10vh;
+	background: rgba(255, 255, 255, 0.2);
+	backdrop-filter: blur(8px);
+	padding: 60px 100px;
+}
+
+.video-container {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+
+.content {
+	margin-top: 40px;
+}
+
+.one-project-name {
+	display: flex;
+	align-items: flex-end;
+}
+
+.project h1 {
+	margin-bottom: 0;
+}
+
+.one-project-link {
+	margin-bottom: 4px;
+	margin-left: 20px;
+}
+
+.content p {
+	margin-top: 20px;
+}
+
+.content h3 {
+	margin-top: 20px;
+}
+
+.content ul {
+	margin-top: 10px;
+	margin-left: 20px;
+}
+
+.content .extra-highlight {
+	margin-top: 40px;
+	padding-bottom: 4px;
+	border-bottom: 1px solid;
 }
 
 @media screen and (max-width: 1200px) {
