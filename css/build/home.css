@@ -118,7 +118,7 @@ ul.transition li {
 }
 
 .main-content h2 {
-	font-size: 2em;
+	font-size: 1.8em;
 }
 
 .margin40 {
@@ -559,6 +559,23 @@ h1 {
 	font-weight: 600;
 	font-size: 2rem;
 	margin-bottom: 30px;
+	margin-top: 40px;
+}
+
+.skills-container {
+	display: grid;
+	grid-template-columns: auto auto auto auto;
+	padding: 10px 40px;
+	column-gap: 10%;
+	row-gap: 40px;
+}
+
+.one-skill {
+	width: 60%;
+}
+
+.one-skill img {
+	width: 100%;
 }
 
 .cards-container {
