@@ -238,6 +238,7 @@ ul.transition li {
 .project-number {
 	font-size: 3rem;
 	margin-bottom: 2rem;
+	display: none;
 }
 
 .project-name {
