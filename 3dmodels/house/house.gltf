@@ -215,12 +215,10 @@
 	],
 	"asset": {
 		"extras": {
-			"author": "fantecboisseau (https://sketchfab.com/fantecboisseau)",
+			"author": "flovekesh9896",
 			"license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
-			"source": "https://sketchfab.com/models/b45403bf4f7849aebb61f7623c00b714",
-			"title": "VIANNEY HOUSE 2"
+			"title": "digpads"
 		},
-		"generator": "Sketchfab-3.18.5",
 		"version": "2.0"
 	},
 	"bufferViews": [
