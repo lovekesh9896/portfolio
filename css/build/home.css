@@ -94,7 +94,7 @@ ul.transition li {
 	font-style: normal;
 	line-height: 5.4rem;
 	word-spacing: normal;
-	font-family: "Aldrich", sans-serif;
+	font-family: "Montserrat", sans-serif;
 }
 
 .line1 {
@@ -198,6 +198,7 @@ ul.transition li {
 	word-spacing: normal;
 	letter-spacing: 0.1rem;
 	margin-top: 20px;
+	font-weight: 300;
 }
 
 .brackets p {
