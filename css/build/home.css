@@ -9,17 +9,22 @@ body {
 	margin: 0;
 	padding: 0;
 	font-family: "Aldrich", cursive;
-	font-size: 1rem;
+	font-size: 16px;
 	width: 100vw;
 	height: 100vh;
 	overflow-y: hidden;
 	overflow-x: hidden;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
 	background: linear-gradient(to right, #6441a5, #2a0845);
 	scroll-behavior: smooth;
+}
+
+::-moz-selection {
+	background: white;
+	color: #2a0845;
+}
+::selection {
+	background: white;
+	color: #2a0845;
 }
 
 ul.transition {
@@ -50,20 +55,37 @@ ul.transition li {
 .section1 {
 	width: 100vw;
 	height: 100vh;
-	display: flex;
+	/* display: flex; */
 	position: absolute;
 	top: 0;
 	left: 0;
-	padding-top: 20vh;
+	padding-top: 15vh;
 	padding-left: 10vw;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
+	color: white;
+	font-family: "Poppins", sans-serif;
 }
 
 .section1 div {
 	z-index: 2;
+}
+
+.line1 {
+	opacity: 0;
+}
+
+.line2 {
+	opacity: 0;
+	font-size: 3rem;
+	margin-bottom: 20px;
+	-webkit-animation-delay: 300ms;
+	animation-delay: 300ms;
+}
+
+.line3 {
+	opacity: 0;
+	font-size: 1.4rem;
+	-webkit-animation-delay: 600ms;
+	animation-delay: 600ms;
 }
 
 @-webkit-keyframes textup {
@@ -88,122 +110,21 @@ ul.transition li {
 	}
 }
 
-.main-content {
-	color: white;
-	font-size: 2rem;
-	font-style: normal;
-	line-height: 5.4rem;
-	word-spacing: normal;
-	font-family: "Montserrat", sans-serif;
-}
-
-.line1 {
-	opacity: 0;
-}
-
-.line2 {
-	opacity: 0;
-	-webkit-animation-delay: 300ms;
-	animation-delay: 300ms;
-}
-.line3 {
-	opacity: 0;
-	-webkit-animation-delay: 600ms;
-	animation-delay: 600ms;
-}
-
 .line-animation {
 	-webkit-animation: textup 1s forwards;
 	animation: textup 1s forwards;
 }
 
-.main-content h2 {
-	font-size: 2em;
-}
-
-.margin40 {
-	height: 5rem;
-	margin-left: 40px;
-}
-
-.arrow {
-	display: flex;
-	justify-content: center;
-}
-
-.arrow img {
-	width: 60px;
-	height: 60px;
+.cta {
+	padding: 10px 16px;
+	font-size: 1.2rem;
+	background: white;
+	color: #2a0845;
 	margin-top: 20px;
-}
-
-.arrow2 {
-	margin-top: 140px;
-	display: flex;
-	justify-content: center;
-}
-
-.arrow2 img {
-	width: 60px;
-	height: 60px;
-	transform: rotateX(180deg);
-}
-
-.tantrum {
-	position: relative;
-	left: -6vw;
-	top: -6vh;
-}
-
-.of {
-	position: absolute;
-	top: 0;
-	left: 0;
-}
-
-.of * {
-	top: 0;
-	left: 0;
-	position: absolute;
-}
-
-.of img {
-	width: 140px;
-}
-
-.of h2 {
-	top: 40px;
-	left: 60px;
-	/* font-size: 60px; */
-}
-.brackets {
-	display: flex;
-	align-items: center;
-	margin-left: 40px;
-}
-
-.brac {
-	height: 80px;
-	overflow: hidden;
-}
-
-.brac img {
-	height: 100%;
-}
-
-.brack-data {
-	height: 80px;
-	font-family: "Poppins", sans-serif;
-	line-height: 30px;
-	word-spacing: normal;
-	letter-spacing: 0.1rem;
-	margin-top: 20px;
-	font-weight: 300;
-}
-
-.brackets p {
-	margin: 0;
-	font-size: 24px;
+	border-radius: 25px;
+	border: none;
+	outline: none;
+	cursor: pointer;
 }
 
 /* -------------- section 2 ------------------ */
@@ -302,33 +223,42 @@ model-viewer::part(default-progress-bar) {
 
 #links {
 	position: fixed;
-	bottom: 4vh;
-	right: 4vw;
-	font-size: 26px;
-	mix-blend-mode: difference;
+	top: 6vh;
+	right: 0vw;
+	font-size: 1.2rem;
 	z-index: 10;
+	font-family: "Poppins", sans-serif;
+	display: flex;
+	background-color: #ebebeb;
+	border-radius: 25px 0 0 25px;
+	padding: 10px 8px;
+	transform: translateX(250px);
 }
 
 #links p {
-	margin-bottom: 10px;
+	/* margin-bottom: 10px; */
+	margin-right: 20px;
 }
 
-#links a {
-	color: white;
+.link-highlight a {
+	color: black;
 	text-align: none;
 	text-decoration: none;
 }
 
 .link-highlight {
-	border-bottom: 2px solid;
+	/* border-bottom: 2px solid; */
+	background: linear-gradient(to right, #6441a5, #2a0845);
+	color: white;
+	padding: 4px 12px;
+	border-radius: 20px;
 }
 
 .second {
-	position: relative;
-	transition: 0.3s;
+	text-decoration: none;
 }
 
-.second::after {
+/* .second::after {
 	width: 0;
 	left: 50%;
 	height: 2px;
@@ -342,7 +272,7 @@ model-viewer::part(default-progress-bar) {
 .second:hover::after {
 	width: 100%;
 	left: 0;
-}
+} */
 
 /* other projects */
 .other-projects ul {
@@ -403,9 +333,9 @@ model-viewer::part(default-progress-bar) {
 	position: absolute;
 	width: 36vw;
 	height: 35vw;
-	background-color: #23689b;
-	top: 30px;
-	left: 30px;
+	background: linear-gradient(to right, #6441a5, #3e0c67);
+	top: 14px;
+	left: 14px;
 	z-index: 0;
 }
 
@@ -506,7 +436,7 @@ h1 {
 	height: 100%;
 	background-color: white;
 	overflow: hidden;
-	color: #23689b;
+	color: #2a0845;
 	z-index: 10;
 }
 
@@ -515,7 +445,7 @@ h1 {
 	content: "";
 	width: 100%;
 	height: 100%;
-	background: #23689b;
+	background: linear-gradient(to right, #6441a5, #2a0845);
 	top: 8px;
 	left: 8px;
 	z-index: -1;
@@ -529,7 +459,7 @@ h1 {
 
 .resume a {
 	text-decoration: none;
-	color: #23689b;
+	color: #2a0845;
 	font-size: 1rem;
 }
 
@@ -598,10 +528,6 @@ h1 {
 	max-width: 600px;
 	position: relative;
 	overflow: hidden;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
 	z-index: 2;
 	transition: 0.4s;
 }
@@ -727,6 +653,52 @@ h1 {
 #links-about .second:hover::after {
 	width: 100%;
 	left: 0;
+}
+@-webkit-keyframes rotating /* Safari and Chrome */ {
+	from {
+		-webkit-transform: rotate(0deg);
+		-o-transform: rotate(0deg);
+		transform: rotate(0deg);
+	}
+	to {
+		-webkit-transform: rotate(360deg);
+		-o-transform: rotate(360deg);
+		transform: rotate(360deg);
+	}
+}
+@keyframes rotating {
+	from {
+		-ms-transform: rotate(360deg);
+		-moz-transform: rotate(360deg);
+		-webkit-transform: rotate(360deg);
+		-o-transform: rotate(360deg);
+		transform: rotate(360deg);
+	}
+	to {
+		-ms-transform: rotate(0deg);
+		-moz-transform: rotate(0deg);
+		-webkit-transform: rotate(0deg);
+		-o-transform: rotate(0deg);
+		transform: rotate(0deg);
+	}
+}
+
+#stop-anim {
+	position: absolute;
+	bottom: 4vh;
+	right: 4vw;
+	width: 140px;
+	-webkit-animation: rotating 2s linear infinite;
+	-moz-animation: rotating 2s linear infinite;
+	-ms-animation: rotating 2s linear infinite;
+	-o-animation: rotating 2s linear infinite;
+	animation: rotating 6s linear infinite;
+	animation-delay: 2s;
+	cursor: pointer;
+}
+
+#stop-anim img {
+	width: 100%;
 }
 
 /* projects */
