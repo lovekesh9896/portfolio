@@ -693,7 +693,7 @@ h1 {
 	-ms-animation: rotating 2s linear infinite;
 	-o-animation: rotating 2s linear infinite;
 	animation: rotating 6s linear infinite;
-	animation-delay: 2s;
+	animation-delay: 3s;
 	cursor: pointer;
 }
 
