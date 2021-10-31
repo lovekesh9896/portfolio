@@ -73,13 +73,23 @@ function home() {
 				this.r = r;
 				this.dx = 0;
 				this.dy = 0;
+				this.id = null;
+				this.curr = 0;
 			}
 
 			draw() {
+				if (this.curr >= this.r) {
+					cancelAnimationFrame(this.id);
+					return;
+				}
+
 				c2.fillStyle = "white";
 				c2.beginPath();
-				c2.arc(this.x, this.y, this.r, 0, 2 * Math.PI);
+				c2.arc(this.x, this.y, this.curr, 0, 2 * Math.PI);
 				c2.fill();
+
+				this.curr += this.r / 60;
+				this.id = requestAnimationFrame(this.draw.bind(this));
 			}
 		}
 
@@ -122,8 +132,8 @@ function home() {
 							{
 								x: (Math.random() - 0.5) * (Math.random() * 4),
 								y: (Math.random() - 0.5) * (Math.random() * 4),
-							}
-						)
+							},
+						),
 					);
 				}
 
@@ -261,16 +271,12 @@ function home() {
 
 		function drawFixedBalls() {
 			c2.fillStyle = "#fff";
-			let circle1 = new FixedBalls(
-				sizes.width * 0.85,
-				sizes.height * 0.3,
-				sizes.width * 0.09
-			);
+			let circle1 = new FixedBalls(0, 0, 0);
 
 			let circle2 = new FixedBalls(
-				sizes.width * 0.75,
-				sizes.height * 0.7,
-				sizes.width * 0.06
+				sizes.width * 0.8,
+				sizes.height * 0.45,
+				sizes.width * 0.12,
 			);
 			// if (sizes.width < 900) {
 			// 	circle2.y = sizes.height * 0.35;
@@ -282,9 +288,9 @@ function home() {
 			// }
 
 			let circle3 = new FixedBalls(
-				sizes.width * 0.57,
-				sizes.height * 0.85,
-				sizes.width * 0.04
+				sizes.width * 0.6,
+				sizes.height * 0.8,
+				sizes.width * 0.04,
 			);
 			// if (sizes.width < 900) {
 			// 	circle3.y = sizes.height * 0.2;
@@ -292,7 +298,7 @@ function home() {
 			let circle4 = new FixedBalls(
 				sizes.width * 0.02,
 				sizes.height * 0.8,
-				sizes.width * 0.05
+				sizes.width * 0.05,
 			);
 			// if (sizes.width < 500) {
 			// 	circle4.x = sizes.width * 0.04;
@@ -317,7 +323,7 @@ function home() {
 				// circle4
 			}
 
-			circle1.draw();
+			// circle1.draw();
 			circle2.draw();
 			circle3.draw();
 			circle4.draw();
@@ -341,31 +347,31 @@ function home() {
 			let circle5 = new FixedBalls(
 				sizes.width * 0.75 + scaleFactor,
 				sizes.height * 1.51,
-				radius
+				radius,
 			);
 
 			let circle6 = new FixedBalls(
 				sizes.width * 0.23 - scaleFactor,
 				sizes.height * 2.51,
-				radius
+				radius,
 			);
 
 			let circle7 = new FixedBalls(
 				sizes.width * 0.75 + scaleFactor,
 				sizes.height * 3.51,
-				radius
+				radius,
 			);
 
 			let circle8 = new FixedBalls(
 				sizes.width * 0.22 - scaleFactor,
 				sizes.height * 4.51,
-				radius
+				radius,
 			);
 
 			let circle9 = new FixedBalls(
 				sizes.width * 0.75 + scaleFactor,
 				sizes.height * 5.51,
-				radius
+				radius,
 			);
 
 			if (fixedBalls.length == 0) {
@@ -415,7 +421,7 @@ function home() {
 					for (let i = 0; i < numberOfBalls; i++) {
 						let radius = Math.floor(randomIntFromRange(10, 30));
 						let x = Math.floor(
-							randomIntFromRange(radius, sizes.width)
+							randomIntFromRange(radius, sizes.width),
 						);
 						let y = Yscroll - radius;
 						let dx = randomIntFromRange(-1, 2);
@@ -483,6 +489,7 @@ function home() {
 			ballA.y -= (1 / ballA.r) * correction[1];
 		}
 
+		let animationId;
 		function animate() {
 			c.fillStyle = grd;
 			c.fillRect(0, 0, sizes.width, sizes.height * canvasScale);
@@ -524,36 +531,73 @@ function home() {
 					ball.dy = 0.01;
 				}
 			}
-			requestAnimationFrame(animate);
+			animationId = requestAnimationFrame(animate);
+		}
+
+		function removeBallAnimation() {
+			document
+				.getElementById("stop-anim")
+				.addEventListener("click", () => {
+					if (animationId == null) {
+						animate();
+					} else {
+						cancelAnimationFrame(animationId);
+						animationId = null;
+						particles = [];
+						balls = [];
+						c.fillStyle = grd;
+						c.fillRect(
+							0,
+							0,
+							sizes.width,
+							sizes.height * canvasScale,
+						);
+					}
+				});
 		}
 
 		animate();
-		drawFixedBalls();
-		init();
+		removeBallAnimation();
 
 		setTimeout(() => {
+			drawFixedBalls();
 			document.body.style["overflow-y"] = "unset";
 			document.body.style.height = "unset";
-		}, 2000);
+		}, 1500);
+
+		setTimeout(() => {
+			init();
+		}, 3000);
 	}
 
 	function addAnimToMainText() {
 		let line1 = document.getElementsByClassName("line1")[0];
 		let line2 = document.getElementsByClassName("line2")[0];
-		let line3 = document.getElementsByClassName("line3")[0];
+		let line3 = document.getElementsByClassName("line3");
 
 		line2.style["animation-delay"] = "300ms";
-		line3.style["animation-delay"] = "600ms";
+		line3[0].style["animation-delay"] = "600ms";
+		line3[1].style["animation-delay"] = "600ms";
 
 		line1.classList.add("line-animation");
 		line2.classList.add("line-animation");
-		line3.classList.add("line-animation");
+		line3[0].classList.add("line-animation");
+		line3[1].classList.add("line-animation");
+
+		gsap.to("#links", 1.5, {
+			x: 0,
+		});
+
+		// setTimeout(() => {
+		// 	document.getElementById("links").style.transform =
+		// 		"translateX(0px)";
+		// }, 2);
 
 		document.getElementById("section2-container").style.display = "block";
 	}
 
-	handleHomePageCanvas();
 	addAnimToMainText();
+	handleHomePageCanvas();
 }
 
 function about() {
@@ -727,7 +771,7 @@ function about() {
 					randomIntFromRange(3, 8) * scale,
 					isHollow,
 					allctx[j],
-					randomIntFromRange(10, 16)
+					randomIntFromRange(10, 16),
 				);
 				object.draw();
 				temp.push(object);
@@ -1062,7 +1106,7 @@ function contentAnimation() {
 		{
 			clipPath: "polygon(0 0, 100% 0,100% 100%, 0% 100% ",
 		},
-		"-=1.1s"
+		"-=1.1s",
 	);
 }
 

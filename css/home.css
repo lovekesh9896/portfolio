@@ -42,8 +42,8 @@ ul.transition li {
 .section1 {
 	width: 100vw;
 	height: 100vh;
-	display: flex;
-	position: absolute;
+	/* display: flex; */
+	/* position: absolute; */
 	top: 0;
 	left: 0;
 	padding-top: 20vh;
@@ -56,110 +56,7 @@ ul.transition li {
 .section1 div {
 	z-index: 2;
 }
-@keyframes textup {
-	from {
-		transform: translateY(-100px);
-		opacity: 0;
-	}
-	to {
-		transform: translateY(0);
-		opacity: 1;
-	}
-}
-.main-content {
-	color: #fff;
-	font-size: 2rem;
-	font-style: normal;
-	line-height: 5.4rem;
-	word-spacing: normal;
-	font-family: Aldrich, sans-serif;
-}
-.line1 {
-	opacity: 0;
-}
-.line2 {
-	opacity: 0;
-	animation-delay: 0.3s;
-}
-.line3 {
-	opacity: 0;
-	animation-delay: 0.6s;
-}
-.line-animation {
-	animation: textup 1s forwards;
-}
-.main-content h2 {
-	font-size: 2em;
-}
-.margin40 {
-	height: 5rem;
-	margin-left: 40px;
-}
-.arrow {
-	display: flex;
-	justify-content: center;
-}
-.arrow img {
-	width: 60px;
-	height: 60px;
-	margin-top: 20px;
-}
-.arrow2 {
-	margin-top: 140px;
-	display: flex;
-	justify-content: center;
-}
-.arrow2 img {
-	width: 60px;
-	height: 60px;
-	transform: rotateX(180deg);
-}
-.tantrum {
-	position: relative;
-	left: -6vw;
-	top: -6vh;
-}
-.of {
-	position: absolute;
-	top: 0;
-	left: 0;
-}
-.of * {
-	top: 0;
-	left: 0;
-	position: absolute;
-}
-.of img {
-	width: 140px;
-}
-.of h2 {
-	top: 40px;
-	left: 60px;
-}
-.brackets {
-	display: flex;
-	align-items: center;
-	margin-left: 40px;
-}
-.brac {
-	height: 80px;
-	overflow: hidden;
-}
-.brac img {
-	height: 100%;
-}
-.brack-data {
-	height: 80px;
-	font-family: Poppins, sans-serif;
-	line-height: 30px;
-	word-spacing: normal;
-	letter-spacing: 0.1rem;
-	margin-top: 20px;
-}
-.brackets p {
-	margin: 0;
-	font-size: 24px;
-}
+
 #section2-container {
 	margin-top: -500vh;
 	display: none;
